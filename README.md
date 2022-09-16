@@ -9,10 +9,20 @@
 
 <!-- Fill this section by Milestone 1 (see specification for details) -->
 
-Here you should be discussing how you will be delegating tasks among team members, as well
-as protocols and processes you will use to keep the project organised. Keep it updated 
-throughout the duration of the project. By the final submission it should contain 
-a summary of who completed what. (You should of course remove and replace this paragraph!)
+Game Design: ALL
+  UML diagram
+  Sequence diagram
+
+Level Design: Sameer
+  Creating Levels
+
+Graphics Design: Jason, Xu Koi Kok
+  Themes of the game
+  Objects/Textures
+  
+Game Engineering: Rebeca
+  Coding the physics of the game
+
 
 <!-- [[EndTeamworkPlan]] PLEASE LEAVE THIS LINE UNTOUCHED -->
 
