@@ -27,14 +27,18 @@ public static class SubmissionInfo
 
     // This may be a "working title" to begin with, but ensure it is final by
     // the video milestone deadline (plain text, no more than 50 chars).
-    public static readonly string GameName = "Replace with your game name";
+    public static readonly string GameName = "Running Man";
 
     // Write a brief blurb of your game, no more than 200 words. Again, ensure
     // this is final by the video milestone deadline.
     public static readonly string GameBlurb = 
-@"Write a blurb of your game here in plain text. This is a
-multiline verbatim string,
-so don't worry about keeping it to one line, just be sure not to indent it.
+@"Running Man is a runner game, the main goal of this game is to get to the highest stage possible
+while not crashing into any obstacles. While running, the player can move up, down, left, or right, 
+corresponding to the direction they want to move, to avoid crashing into oncoming obstacles, such as 
+vehicles, walls, boxes, poles, etc. Crashing results in the game ending. The player can collect various items/power ups to 
+enhance their character (eg. running slower, teleport forward, jump higher). Other items could be armour to block one collision. 
+Player needs to reach the finish line to complete each stage/level, and unlock new stages as they go along. 
+
 ";
     
     // By the gameplay video milestone deadline this should be a direct link
