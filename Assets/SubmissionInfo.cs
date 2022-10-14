@@ -21,7 +21,6 @@ public static class SubmissionInfo
         new TeamMember("Xu Koi Kok", "kokx@student.unimelb.edu.au"),
         new TeamMember("Rebeca Monserrat Guevara Lagunas", "rguevara@student.unimelb.edu.au"),
         new TeamMember("Jason Phan", "phanjp@student.unimelb.edu.au"),
-        // Remove the following line if you have a group of 3
         new TeamMember("Sameer Sikka", "ssikka@student.unimelb.edu.au"), 
     };
 
@@ -37,8 +36,7 @@ while not crashing into any obstacles. While running, the player can move up, do
 corresponding to the direction they want to move, to avoid crashing into oncoming obstacles, such as 
 vehicles, walls, boxes, poles, etc. Crashing results in the game ending. The player can collect various items/power ups to 
 enhance their character (eg. running slower, teleport forward, jump higher). Other items could be armour to block one collision. 
-Player needs to reach the finish line to complete each stage/level, and unlock new stages as they go along. 
-
+Player needs to reach the finish line to complete each stage/level, and unlock new stages as they go along.
 ";
     
     // By the gameplay video milestone deadline this should be a direct link
