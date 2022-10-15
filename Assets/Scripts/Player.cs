@@ -9,22 +9,19 @@ public class Player : MonoBehaviour
     // private bool isMovingY = false;
     // private int[] possiblePositionsX = {-5, 0, 5};
     // private Vector3 moveDirection;
-    // private float xMoveTime = 3; // in seconds
-    // private float yMoveTime = 3; // in seconds
-    private Vector3 xMove = new Vector3(5,0,0);
-    private Vector3 yMove = new Vector3(0,5,0);
+    private bool isJump, isDuck, isMoveX;
+    private float JumpStartTime, DuckStartTime, MoveXStartTime;
+    private float defaultMoveTime = 1; // in seconds
+    private Vector3 newPosition = this.transform.position;
+    private Vector3 xMoveInSteps, yMoveInSteps;
+    private float xMove = 5;
+    private float yMove = 5;
     
     private void Update(){
         if(Input.GetAxis("Horizontal") > 0){
-            if(this.transform.position.x > 0)
-                RightEdgeHit();
-            else
                 MoveRight();
         }
         if(Input.GetAxis("Horizontal") < 0){
-            if(this.transform.position.x < 0)
-                LeftEdgeHit();
-            else 
                 MoveLeft();
         }
         if(Input.GetAxis("Vertical") > 0){
@@ -36,36 +33,85 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        // if (isMovingX && possiblePositionsX.Contains(this.position.x)){
-        //     isMovingX = false;
-        //     moveDirection = Vector3.zero;
-        // }
-        // if (isMoving)
-        //     this.position += moveDirection / (moveTime * Time.fixedDeltaTime);
+
+        if(isMoveX){
+            if(xMoveInSteps > 0)
+                LeftAnimation();
+            else
+                RightAnimation();
+        }
+
+
+        if(isJump){
+            // Change y over the course of defaultMoveTime seconds
+            if(Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultMoveTime * 2)
+                isJump = false;
+            JumpAnimation();
+        }
+        else if(isDuck){
+            // Change y over the course of defaultMoveTime seconds
+            if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime)
+                isDuck = false;
+            DuckAnimation();
+        }
     }
 
-    private void MoveRight(){
-        // isMoving = true;
-        this.transform.position += xMove;
-    }
     private void MoveLeft(){
-        // isMoving = true;
-        this.transform.position -= xMove;
+        if(newPosition.x < 0)
+                LeftEdgeHit();
+        else
+        {
+            isMoveX = true;
+            MoveXStartTime = Time.realtimeSinceStartupAsDouble;
+            newPosition += xMove * Vector3.left;
+            xMoveInSteps = (newPosition - this.transform.position) * Time.fixedDeltaTime;
+        } 
+    }
+    private void MoveRight(){
+        if(newPosition.x > 0)
+                RightEdgeHit();
+        else
+        {
+            isMoveX = true;
+            MoveXStartTime = Time.realtimeSinceStartupAsDouble;
+            newPosition += xMove * Vector3.right;
+            xMoveInSteps = (newPosition - this.transform.position) * Time.fixedDeltaTime;
+        }
     }
     private void Jump(){
-        // isMoving = true;
-        this.transform.position += yMove;
+
+        // Spamming Jump is not allowed
+        if(!isJump){
+            isJump = true;
+            JumpStartTime = Time.realtimeSinceStartupAsDouble;
+            if(isDuck)
+                isDuck = false;
+        }
     }
     private void Duck(){
-        // isMoving = true;
-        this.transform.position -= yMove;
+
+        // Spamming Duck is not allowed
+        if(!isDuck){
+            isDuck = true;
+            DuckStartTime = Time.realtimeSinceStartupAsDouble;
+            if(isJump)
+                isJump = false;
+        }
     }
 
     private void LeftEdgeHit(){
-        
+        // Player Animation when character hits left edge
     }
-
     private void RightEdgeHit(){
-
+        // Player Animation when character hits right edge
+    }
+    private void SquatAnimation(){
+        // Player Animation when character ducks / jumps
+    }
+    private void LeftAnimation(){
+        // Player Animation when character moves left
+    }
+    private void RightAnimation(){
+        // Player Animation when character moves right
     }
 }
