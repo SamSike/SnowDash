@@ -10,12 +10,12 @@ public class Player : MonoBehaviour
     // private int[] possiblePositionsX = {-5, 0, 5};
     // private Vector3 moveDirection;
     private bool isJump, isDuck, isMoveX;
-    private float JumpStartTime, DuckStartTime, MoveXStartTime;
+    private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float defaultMoveTime = 1; // in seconds
-    private Vector3 newPosition = this.transform.position;
+    private Vector3 newPosition = Vector3.zero;
     private Vector3 xMoveInSteps, yMoveInSteps;
     private float xMove = 5;
-    private float yMove = 5;
+    //private float yMove = 5;
     
     private void Update(){
         if(Input.GetAxis("Horizontal") > 0){
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate(){
 
         if(isMoveX){
-            if(xMoveInSteps > 0)
+            if(xMoveInSteps.x > 0)
                 LeftAnimation();
             else
                 RightAnimation();
@@ -105,8 +105,11 @@ public class Player : MonoBehaviour
     private void RightEdgeHit(){
         // Player Animation when character hits right edge
     }
-    private void SquatAnimation(){
-        // Player Animation when character ducks / jumps
+    private void DuckAnimation(){
+        // Player Animation when character ducks
+    }
+    private void JumpAnimation(){
+        // Player Animation when character jumps
     }
     private void LeftAnimation(){
         // Player Animation when character moves left
