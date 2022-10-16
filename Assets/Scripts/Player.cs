@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float defaultMoveTime = 0.5f; // in seconds
     private Vector3 newPosition;
-    private float xMoveInSteps;
+    private float xMoveInSteps, yMoveInSteps;
     private float xMove = 5f;
     private float yMove = 5f;
 
@@ -69,9 +69,11 @@ public class Player : MonoBehaviour
         }
         else if(isDuck){
             DuckAnimation();
+            IncrementY(yMoveInSteps);
             if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime){
                 isDuck = false;
                 DefaultAnimation();
+                SetY(0);
             }
         }
         IncrementZ(zSpeed * Time.fixedDeltaTime);
@@ -141,6 +143,7 @@ public class Player : MonoBehaviour
         if(!isDuck){
             isDuck = true;
             DuckStartTime = Time.realtimeSinceStartupAsDouble;
+            yMoveInSteps = -this.transform.position.y * Time.fixedDeltaTime / defaultMoveTime;
             if(isJump)
                 isJump = false;
         }
