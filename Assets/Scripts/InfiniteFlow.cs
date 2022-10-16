@@ -9,7 +9,7 @@ public class InfiniteFlow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextTileSpawn.z = 300;
+        nextTileSpawn.z = 60;
         StartCoroutine(spawnTile());
     }
 
@@ -20,9 +20,9 @@ public class InfiniteFlow : MonoBehaviour
     }
     IEnumerator spawnTile()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         Instantiate(tile1, nextTileSpawn, tile1.rotation);
-        nextTileSpawn.z += 100;
+        nextTileSpawn.z += 20;
         StartCoroutine(spawnTile());
     }
 }

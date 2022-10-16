@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     private float defaultMoveTime = 1f; // in seconds
     private Vector3 newPosition;
     private float xMoveInSteps;
-    private float xMove = 5;
-    private float yMove = 5;
+    private float xMove = 1;
+    private float yMove = 1;
 
     private float zSpeed = 5;
     private float zAcceleration = 0;
