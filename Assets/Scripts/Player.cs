@@ -14,11 +14,11 @@ public class Player : MonoBehaviour
     private float defaultMoveTime = 0.5f; // in seconds
     private Vector3 newPosition;
     private float xMoveInSteps;
-    private float xMove = 5;
-    private float yMove = 5;
+    private float xMove = 5f;
+    private float yMove = 5f;
 
-    private float zSpeed = 5;
-    private float zAcceleration = 0;
+    private float zSpeed = 5f;
+    private float zAcceleration = 0.1f;
     
     private void Start(){
         isJump = isDuck = isMoveX  = false;
