@@ -47,31 +47,32 @@ public class Player : MonoBehaviour
             else
                 RightAnimation();
             IncrementX(xMoveInSteps);
+
             if(Time.realtimeSinceStartupAsDouble - MoveXStartTime >= defaultMoveTime){
                 isMoveX = false;
                 SetX(newPosition.x);
+                DefaultAnimation();
             }
         }
 
         if(isJump){
-            // Change y over the course of defaultMoveTime seconds
+            float jumpAngle = (float)((Time.realtimeSinceStartupAsDouble - JumpStartTime) * 90 / defaultMoveTime);
+            float jumpRadians = jumpAngle * Mathf.Deg2Rad;
+            SetY(yMove * Mathf.Sin(jumpRadians));
+            JumpAnimation();
+
             if(Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultMoveTime * 2){
                 isJump = false;
                 DefaultAnimation();
                 SetY(0);
             }
-            float jumpAngle = (float)((Time.realtimeSinceStartupAsDouble - JumpStartTime) * 90 / defaultMoveTime);
-            float jumpRadians = jumpAngle * Mathf.Deg2Rad;
-            SetY(yMove * Mathf.Sin(jumpRadians));
-            JumpAnimation();
         }
         else if(isDuck){
-            // Change y over the course of defaultMoveTime seconds
+            DuckAnimation();
             if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime){
                 isDuck = false;
                 DefaultAnimation();
             }
-            DuckAnimation();
         }
         IncrementZ(zSpeed * Time.fixedDeltaTime);
         zSpeed += zAcceleration * Time.fixedDeltaTime;
@@ -106,9 +107,7 @@ public class Player : MonoBehaviour
             isMoveX = true;
             MoveXStartTime = Time.realtimeSinceStartupAsDouble;
             newPosition += xMove * Vector3.left;
-
-            // Player moves this much in 1 frame
-            xMoveInSteps = (newPosition.x - this.transform.position.x) * Time.fixedDeltaTime / defaultMoveTime;
+            MoveXStart();
         }
     }
     private void MoveRight(){
@@ -119,10 +118,12 @@ public class Player : MonoBehaviour
             isMoveX = true;
             MoveXStartTime = Time.realtimeSinceStartupAsDouble;
             newPosition += xMove * Vector3.right;
-
-            // Player moves this much in 1 frame
-            xMoveInSteps = (newPosition.x - this.transform.position.x) * Time.fixedDeltaTime;
+            MoveXStart();
         }
+    }
+    private void MoveXStart(){
+        // Player moves this much in 1 frame
+        xMoveInSteps = (newPosition.x - this.transform.position.x) * Time.fixedDeltaTime / defaultMoveTime;
     }
     private void Jump(){
 
