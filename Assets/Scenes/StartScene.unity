@@ -229,6 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile1: {fileID: 632223027}
+  tree1: {fileID: 2648367812643474098, guid: 584484346fa7d4d26891fb6c8cece232, type: 3}
+  treeStump1: {fileID: 3783407810541295211, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
 --- !u!4 &1221878913
 Transform:
   m_ObjectHideFlags: 0
@@ -541,6 +543,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5089856512858421894, guid: afe2920b91d724b28a5688e76bfb0c88, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40e6a70023e614b09a6357b994974e01, type: 2}
     - target: {fileID: 5089856512858421912, guid: afe2920b91d724b28a5688e76bfb0c88, type: 3}
       propertyPath: m_Name
       value: Plane
