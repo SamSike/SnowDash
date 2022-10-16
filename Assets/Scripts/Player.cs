@@ -11,23 +11,30 @@ public class Player : MonoBehaviour
     // private Vector3 moveDirection;
     private bool isJump, isDuck, isMoveX;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
-    private float defaultMoveTime = 1; // in seconds
-    private Vector3 newPosition = Vector3.zero;
-    private Vector3 xMoveInSteps, yMoveInSteps;
+    private float defaultMoveTime = 0.5f; // in seconds
+    private Vector3 newPosition;
+    private float xMoveInSteps;
     private float xMove = 5;
-    //private float yMove = 5;
+    private float yMove = 5;
+
+    private float zSpeed = 5;
+    private float zAcceleration = 0;
     
+    private void Start(){
+        isJump = isDuck = isMoveX  = false;
+    }
+
     private void Update(){
-        if(Input.GetAxis("Horizontal") > 0){
-                MoveRight();
+        if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)){
+            MoveRight();
         }
-        if(Input.GetAxis("Horizontal") < 0){
-                MoveLeft();
+        if(Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)){
+            MoveLeft();
         }
-        if(Input.GetAxis("Vertical") > 0){
+        if(Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space)){
             Jump();
         }
-        if(Input.GetAxis("Vertical") < 0){
+        if(Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)){
             Duck();
         }
     }
@@ -35,26 +42,61 @@ public class Player : MonoBehaviour
     private void FixedUpdate(){
 
         if(isMoveX){
-            if(xMoveInSteps.x > 0)
+            if(xMoveInSteps > 0)
                 LeftAnimation();
             else
                 RightAnimation();
+            IncrementX(xMoveInSteps);
+            if(Time.realtimeSinceStartupAsDouble - MoveXStartTime >= defaultMoveTime){
+                isMoveX = false;
+                SetX(newPosition.x);
+            }
         }
-
 
         if(isJump){
             // Change y over the course of defaultMoveTime seconds
-            if(Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultMoveTime * 2)
+            if(Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultMoveTime * 2){
                 isJump = false;
+                DefaultAnimation();
+                SetY(0);
+            }
+            float jumpAngle = (float)((Time.realtimeSinceStartupAsDouble - JumpStartTime) * 90 / defaultMoveTime);
+            float jumpRadians = jumpAngle * Mathf.Deg2Rad;
+            SetY(yMove * Mathf.Sin(jumpRadians));
             JumpAnimation();
         }
         else if(isDuck){
             // Change y over the course of defaultMoveTime seconds
-            if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime)
+            if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime){
                 isDuck = false;
+                DefaultAnimation();
+            }
             DuckAnimation();
         }
+        IncrementZ(zSpeed * Time.fixedDeltaTime);
+        zSpeed += zAcceleration * Time.fixedDeltaTime;
     }
+
+    private void SetX(float value){
+        this.transform.position = new Vector3(value, this.transform.position.y, this.transform.position.z);
+    }
+    private void SetY(float value){
+        this.transform.position = new Vector3(this.transform.position.x, value, this.transform.position.z);
+    }
+    private void SetZ(float value){
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value);
+    }
+
+    private void IncrementX(float value){
+        this.transform.position = new Vector3(value + this.transform.position.x, this.transform.position.y, this.transform.position.z);
+    }
+    private void IncrementY(float value){
+        this.transform.position = new Vector3(this.transform.position.x, value + this.transform.position.y, this.transform.position.z);
+    }
+    private void IncrementZ(float value){
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
+    }
+
 
     private void MoveLeft(){
         if(newPosition.x < 0)
@@ -64,8 +106,10 @@ public class Player : MonoBehaviour
             isMoveX = true;
             MoveXStartTime = Time.realtimeSinceStartupAsDouble;
             newPosition += xMove * Vector3.left;
-            xMoveInSteps = (newPosition - this.transform.position) * Time.fixedDeltaTime;
-        } 
+
+            // Player moves this much in 1 frame
+            xMoveInSteps = (newPosition.x - this.transform.position.x) * Time.fixedDeltaTime / defaultMoveTime;
+        }
     }
     private void MoveRight(){
         if(newPosition.x > 0)
@@ -75,7 +119,9 @@ public class Player : MonoBehaviour
             isMoveX = true;
             MoveXStartTime = Time.realtimeSinceStartupAsDouble;
             newPosition += xMove * Vector3.right;
-            xMoveInSteps = (newPosition - this.transform.position) * Time.fixedDeltaTime;
+
+            // Player moves this much in 1 frame
+            xMoveInSteps = (newPosition.x - this.transform.position.x) * Time.fixedDeltaTime;
         }
     }
     private void Jump(){
@@ -110,6 +156,9 @@ public class Player : MonoBehaviour
     }
     private void JumpAnimation(){
         // Player Animation when character jumps
+    }
+    private void DefaultAnimation(){
+        // Default Player Animation
     }
     private void LeftAnimation(){
         // Player Animation when character moves left
