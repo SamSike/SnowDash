@@ -117,6 +117,14 @@ public class Player : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
     }
 
+    private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.tag == "Finish"){
+            Jump();
+        }
+        //if(collision.gameObject.tag == "Collectable"){
+            //points += 1;
+        //}
+    }
 
     private void MoveLeft()
     {
