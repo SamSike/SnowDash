@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private float yMove = 1f;
 
     private float zSpeed = 5f;
-    private float zAcceleration = 0.1f;
+    private float zAcceleration = 0.5f;
 
     private void Start()
     {
