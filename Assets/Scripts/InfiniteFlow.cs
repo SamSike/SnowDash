@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class InfiniteFlow : MonoBehaviour
 {
-    public Transform tile1;
+    public GameObject tile1;
     private Vector3 nextTileSpawn;
     private Vector3 nextObstV;
-    public Transform tree1;
-    public Transform branch1;
-    public Transform treeStump1;
+    public GameObject tree1;
+    public GameObject branch1;
+    public GameObject treeStump1;
 
-    private List<Transform> obstacles;
-    private List<Transform> edgeObstacles;
+    public Camera mainCamera;
+    private List<GameObject> tilesInGame;
+    private List<GameObject> obstaclesInGame;
+
+    private List<GameObject> obstacles;
+    private List<GameObject> edgeObstacles;
+    
     private int randX;
-
+    private float tileSize = 20;
+    
     // Start is called before the first frame update
     void Start()
     {
-        obstacles = new List<Transform>();
-        edgeObstacles = new List<Transform>();
+        obstacles = new List<GameObject>();
+        edgeObstacles = new List<GameObject>();
         nextTileSpawn.z = 60;
         obstacles.Add(tree1);
         obstacles.Add(treeStump1);
@@ -27,22 +33,36 @@ public class InfiniteFlow : MonoBehaviour
         edgeObstacles.Add(branch1);
         StartCoroutine(spawnTile());
 
+        tilesInGame = new List<GameObject>();
+        obstaclesInGame = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        try{
+            if(tilesInGame[0].transform.position.z + tileSize < mainCamera.transform.position.z){
+                Destroy(tilesInGame[0]);
+                tilesInGame.RemoveAt(0);
+            }
+            if(obstaclesInGame[0].transform.position.z < mainCamera.transform.position.z){
+                Destroy(obstaclesInGame[0]);
+                obstaclesInGame.RemoveAt(0);
+            }
+        }
+        catch(System.ArgumentOutOfRangeException e){
+            ;
+        }
     }
     IEnumerator spawnTile()
     {
         yield return new WaitForSeconds(2);
         randX = Random.Range(-1, 2);
 
-        Instantiate(tile1, nextTileSpawn, tile1.rotation);
+        tilesInGame.Add(Instantiate(tile1, nextTileSpawn, tile1.transform.rotation));
         nextObstV = nextTileSpawn;
         nextObstV.x = randX;
-        Transform obst;
+        GameObject obst;
 
         if (randX == -1 || randX == 1)
         {
@@ -54,7 +74,7 @@ public class InfiniteFlow : MonoBehaviour
         }
 
         if (obst == branch1) nextObstV.y = 0.75f;
-        Instantiate(obst, nextObstV, obst.rotation);
+        obstaclesInGame.Add(Instantiate(obst, nextObstV, obst.transform.rotation));
 
         nextTileSpawn.z += 20;
         StartCoroutine(spawnTile());

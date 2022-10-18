@@ -17,11 +17,12 @@ public class Player : MonoBehaviour
     private float xMove = 1f;
     private float yMove = 1f;
 
-    private float zSpeed = 5;
-    private float zAcceleration = 0;
-    
-    private void Start(){
-        isJump = isDuck = isMoveX  = false;
+    private float zSpeed = 5f;
+    private float zAcceleration = 0.1f;
+
+    private void Start()
+    {
+        isJump = isDuck = isMoveX = false;
     }
 
     private void Update()
@@ -117,6 +118,14 @@ public class Player : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
     }
 
+    private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.tag == "Finish"){
+            Jump();
+        }
+        //if(collision.gameObject.tag == "Collectable"){
+            //points += 1;
+        //}
+    }
 
     private void MoveLeft()
     {
