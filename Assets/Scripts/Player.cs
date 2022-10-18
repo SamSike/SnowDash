@@ -20,17 +20,21 @@ public class Player : MonoBehaviour
     private float xMove = 1f;
     private float yMove = 3f;
 
-    private float zSpeed = 5;
-    private float zAcceleration = 0;
+    private float duckSpeed;
+    private float zSpeed = 5f;
+    private float zAcceleration = 0.3f;
     
     //The re-sizing of the y scale to give the effect of dunk
     private float crouch = 0.3f;
+    private float defaultScale;
 
 
     //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
     private void Start(){
         isJump = isDuck = isMoveX  = false;
         isZ = true;
+        defaultScale = this.transform.localScale.y;
+        duckSpeed = -yMove * Time.fixedDeltaTime * 1.5f;
     }
     
     //Taken from Unitys page
@@ -102,22 +106,20 @@ public class Player : MonoBehaviour
         
         else if (isDuck)
         {            
-            SetC(crouch);
+            if(this.transform.position.y <= 0){
+                SetY(0);
+                DuckAnimation();
+            }
+            else
+                IncrementY(duckSpeed);
 
-            DuckAnimation();
-            IncrementY(yMoveInSteps);
             if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime){
                 isDuck = false;
                 DefaultAnimation();
-                SetC(0.5f);
-                
             }
         }
 
-        walkZ();
-        //IncrementZ(zSpeed * Time.fixedDeltaTime);
-           // zSpeed += zAcceleration * Time.fixedDeltaTime; 
-        
+        walkZ();        
     }
 
     private void SetX(float value)
@@ -188,17 +190,11 @@ public class Player : MonoBehaviour
         if (!isJump)
         {
             isJump = true;
-            
             JumpStartTime = Time.realtimeSinceStartupAsDouble;
-
-            if (!isDuck){
-                isDuck = true;
-                DuckStartTime = Time.realtimeSinceStartupAsDouble;
-                
-            }
-            
-                
         }
+        if (isDuck)
+            isDuck = false;                
+    
     }
     private void Duck()
     {
@@ -208,16 +204,11 @@ public class Player : MonoBehaviour
         {
             isDuck = true;
             DuckStartTime = Time.realtimeSinceStartupAsDouble;
-            
-            yMoveInSteps = -this.transform.position.y * Time.fixedDeltaTime / defaultMoveTime;
-            if(isJump){
+        }  
 
-                isJump = false;
-                JumpStartTime = Time.realtimeSinceStartupAsDouble;
-
-            }
-                
-        }
+        if(isJump)
+            isJump = false;
+        
     }
 
     
@@ -244,15 +235,18 @@ public class Player : MonoBehaviour
     }
     private void DuckAnimation()
     {
-        // Player Animation when character ducks
+        // Player Animation when character ducks 
+        SetC(crouch);
     }
     private void JumpAnimation()
     {
         // Player Animation when character jumps
+        DefaultAnimation();
     }
     private void DefaultAnimation()
     {
         // Default Player Animation
+        SetC(defaultScale);
     }
     private void LeftAnimation()
     {
