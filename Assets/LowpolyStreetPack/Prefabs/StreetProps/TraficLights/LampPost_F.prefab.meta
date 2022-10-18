@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 38e0f6c0765a5374f9a428840748d450
+guid: 9a4548a096dcf0b4bbd08df5cac590a7
+labels:
+- lamp
+- light
+- trafic
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

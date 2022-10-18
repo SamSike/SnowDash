@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 38e0f6c0765a5374f9a428840748d450
+guid: 859c228a1a8fbe4439ce250eabda57aa
+labels:
+- lamp
+- light
+- park
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
