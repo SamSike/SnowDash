@@ -12,6 +12,7 @@ public class InfiniteFlow : MonoBehaviour
     public GameObject treeStump1;
 
     public Camera mainCamera;
+    public Player player;
     private List<GameObject> tilesInGame;
     private List<GameObject> obstaclesInGame;
 
@@ -56,27 +57,29 @@ public class InfiniteFlow : MonoBehaviour
     }
     IEnumerator spawnTile()
     {
-        yield return new WaitForSeconds(2);
-        randX = Random.Range(-1, 2);
+        if(player.GetIsZ()){
+            yield return new WaitForSeconds(2);
+            randX = Random.Range(-1, 2);
 
-        tilesInGame.Add(Instantiate(tile1, nextTileSpawn, tile1.transform.rotation));
-        nextObstV = nextTileSpawn;
-        nextObstV.x = randX;
-        GameObject obst;
+            tilesInGame.Add(Instantiate(tile1, nextTileSpawn, tile1.transform.rotation));
+            nextObstV = nextTileSpawn;
+            nextObstV.x = randX;
+            GameObject obst;
 
-        if (randX == -1 || randX == 1)
-        {
-            obst = edgeObstacles[Random.Range(0, edgeObstacles.Count)];
+            if (randX == -1 || randX == 1)
+            {
+                obst = edgeObstacles[Random.Range(0, edgeObstacles.Count)];
+            }
+            else
+            {
+                obst = obstacles[Random.Range(0, obstacles.Count)];
+            }
+
+            if (obst == branch1) nextObstV.y = 0.75f;
+            obstaclesInGame.Add(Instantiate(obst, nextObstV, obst.transform.rotation));
+
+            nextTileSpawn.z += 20;
+            StartCoroutine(spawnTile());
         }
-        else
-        {
-            obst = obstacles[Random.Range(0, obstacles.Count)];
-        }
-
-        if (obst == branch1) nextObstV.y = 0.75f;
-        obstaclesInGame.Add(Instantiate(obst, nextObstV, obst.transform.rotation));
-
-        nextTileSpawn.z += 20;
-        StartCoroutine(spawnTile());
     }
 }

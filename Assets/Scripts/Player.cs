@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     // private bool isMovingY = false;
     // private int[] possiblePositionsX = {-5, 0, 5};
     // private Vector3 moveDirection;
-    private bool isJump, isDuck, isMoveX, isZ;
+    private bool isJump, isDuck, isMoveX, isZ = true;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float defaultMoveTime = 1f; // in seconds
     private Vector3 newPosition;
@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
     //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
     private void Start(){
         isJump = isDuck = isMoveX  = false;
-        isZ = true;
         defaultScale = this.transform.localScale.y;
         duckSpeed = -yMove * Time.fixedDeltaTime * 1.5f;
     }
@@ -40,9 +39,9 @@ public class Player : MonoBehaviour
     //Taken from Unitys page
     void OnTriggerEnter(Collider collision)
     {
-    
         Debug.Log(collision.GetComponent<Collider>().name);
-        isZ = false;
+        if(collision.GetComponent<Collider>().tag == "Finish")
+            isZ = false;
         
     }
 
@@ -152,6 +151,8 @@ public class Player : MonoBehaviour
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
     }
+    public float GetZSpeed(){ return zSpeed; }
+    public bool GetIsZ(){ return isZ; }
 
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
