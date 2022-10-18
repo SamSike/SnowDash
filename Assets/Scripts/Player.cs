@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     // private bool isMovingY = false;
     // private int[] possiblePositionsX = {-5, 0, 5};
     // private Vector3 moveDirection;
-    private bool isJump, isDuck, isMoveX, isZ;
+    private bool isJump, isDuck, isMoveX, isZ = true;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float defaultMoveTime = 1f; // in seconds
     private Vector3 newPosition;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     private float duckSpeed;
     private float zSpeed = 5f;
-    private float zAcceleration = 0.3f;
+    private float zAcceleration = 0.5f;
     
     //The re-sizing of the y scale to give the effect of dunk
     private float crouch = 0.3f;
@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
     //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
     private void Start(){
         isJump = isDuck = isMoveX  = false;
-        isZ = true;
         defaultScale = this.transform.localScale.y;
         duckSpeed = -yMove * Time.fixedDeltaTime * 1.5f;
     }
@@ -40,10 +39,11 @@ public class Player : MonoBehaviour
     //Taken from Unitys page
     void OnTriggerEnter(Collider collision)
     {
-    
         Debug.Log(collision.GetComponent<Collider>().name);
-        isZ = false;
-        
+        if(collision.GetComponent<Collider>().tag == "Finish"){
+            isZ = false;
+            CollideAnimation();
+        }
     }
 
     //Notas pa que le entieda: Pico la tecla y llama a la funcion principal
@@ -65,14 +65,11 @@ public class Player : MonoBehaviour
         {
            Duck();
         }
-        
-
-
     }
 
     private void FixedUpdate()
     {
-
+        if(isZ){
         if (isMoveX)
         {
             if (xMoveInSteps > 0)
@@ -119,7 +116,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        walkZ();        
+        walkZ();     
+        }   
     }
 
     private void SetX(float value)
@@ -152,6 +150,8 @@ public class Player : MonoBehaviour
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
     }
+    public float GetZSpeed(){ return zSpeed; }
+    public bool GetIsZ(){ return isZ; }
 
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
@@ -215,14 +215,8 @@ public class Player : MonoBehaviour
 
     private void walkZ()
     {
-        if(isZ)
-        {
-            IncrementZ(zSpeed * Time.fixedDeltaTime);
-            zSpeed += zAcceleration * Time.fixedDeltaTime; 
-            
-        }
-
-
+        IncrementZ(zSpeed * Time.fixedDeltaTime);
+        zSpeed += zAcceleration * Time.fixedDeltaTime;
     }
 
     private void LeftEdgeHit()
@@ -247,6 +241,11 @@ public class Player : MonoBehaviour
     {
         // Default Player Animation
         SetC(defaultScale);
+    }
+    private void CollideAnimation()
+    {
+        // Player Animation when character collides with obstacle
+        DefaultAnimation();
     }
     private void LeftAnimation()
     {
