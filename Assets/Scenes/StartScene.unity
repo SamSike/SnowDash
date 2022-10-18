@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.06781944, g: 0.27394506, b: 0.484644, a: 1}
+  m_IndirectSpecularColor: {r: 0.067819566, g: 0.27394518, b: 0.48464394, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3035,9 +3035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26010701778b4493f949e1a1734f1c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile1: {fileID: 1804159483}
-  tree1: {fileID: 3425890022010720264, guid: 584484346fa7d4d26891fb6c8cece232, type: 3}
-  branch1: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
+  tile1: {fileID: 1451780946}
+  tree1: {fileID: 8848872821412255961, guid: 1e4f49afacfb1774db32a9b1f2e72e4a, type: 3}
+  branch1: {fileID: 919132149155446097, guid: 55df51f98c0b08f46b8eee7d9ca67422, type: 3}
   treeStump1: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
   mainCamera: {fileID: 1875291989}
 --- !u!4 &1221878913
@@ -4846,7 +4846,7 @@ GameObject:
   - component: {fileID: 1875291991}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
