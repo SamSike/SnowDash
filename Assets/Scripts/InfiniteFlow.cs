@@ -58,7 +58,7 @@ public class InfiniteFlow : MonoBehaviour
     IEnumerator spawnTile()
     {
         if(player.GetIsZ()){
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(tileSize / (2 * player.GetZSpeed()));
             randX = Random.Range(-1, 2);
 
             tilesInGame.Add(Instantiate(tile1, nextTileSpawn, tile1.transform.rotation));

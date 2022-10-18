@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     private float duckSpeed;
     private float zSpeed = 5f;
-    private float zAcceleration = 0.3f;
+    private float zAcceleration = 0.5f;
     
     //The re-sizing of the y scale to give the effect of dunk
     private float crouch = 0.3f;
@@ -40,9 +40,10 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         Debug.Log(collision.GetComponent<Collider>().name);
-        if(collision.GetComponent<Collider>().tag == "Finish")
+        if(collision.GetComponent<Collider>().tag == "Finish"){
             isZ = false;
-        
+            CollideAnimation();
+        }
     }
 
     //Notas pa que le entieda: Pico la tecla y llama a la funcion principal
@@ -64,14 +65,11 @@ public class Player : MonoBehaviour
         {
            Duck();
         }
-        
-
-
     }
 
     private void FixedUpdate()
     {
-
+        if(isZ){
         if (isMoveX)
         {
             if (xMoveInSteps > 0)
@@ -118,7 +116,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        walkZ();        
+        walkZ();     
+        }   
     }
 
     private void SetX(float value)
@@ -216,14 +215,8 @@ public class Player : MonoBehaviour
 
     private void walkZ()
     {
-        if(isZ)
-        {
-            IncrementZ(zSpeed * Time.fixedDeltaTime);
-            zSpeed += zAcceleration * Time.fixedDeltaTime; 
-            
-        }
-
-
+        IncrementZ(zSpeed * Time.fixedDeltaTime);
+        zSpeed += zAcceleration * Time.fixedDeltaTime;
     }
 
     private void LeftEdgeHit()
@@ -248,6 +241,11 @@ public class Player : MonoBehaviour
     {
         // Default Player Animation
         SetC(defaultScale);
+    }
+    private void CollideAnimation()
+    {
+        // Player Animation when character collides with obstacle
+        DefaultAnimation();
     }
     private void LeftAnimation()
     {
