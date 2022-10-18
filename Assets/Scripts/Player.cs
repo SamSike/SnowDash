@@ -5,26 +5,44 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+
+    
+    
     // private bool isMovingX = false;
     // private bool isMovingY = false;
     // private int[] possiblePositionsX = {-5, 0, 5};
     // private Vector3 moveDirection;
-    private bool isJump, isDuck, isMoveX;
+    private bool isJump, isDuck, isMoveX, isZ;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float defaultMoveTime = 1f; // in seconds
     private Vector3 newPosition;
     private float xMoveInSteps, yMoveInSteps;
     private float xMove = 1f;
-    private float yMove = 1f;
+    private float yMove = 3f;
 
-    private float zSpeed = 5f;
-    private float zAcceleration = 0.1f;
+    private float zSpeed = 5;
+    private float zAcceleration = 0;
+    
+    //The re-sizing of the y scale to give the effect of dunk
+    private float crouch = 0.3f;
 
-    private void Start()
+
+    //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
+    private void Start(){
+        isJump = isDuck = isMoveX  = false;
+        isZ = true;
+    }
+    
+    //Taken from Unitys page
+    void OnTriggerEnter(Collider collision)
     {
-        isJump = isDuck = isMoveX = false;
+    
+        Debug.Log(collision.GetComponent<Collider>().name);
+        isZ = false;
+        
     }
 
+    //Notas pa que le entieda: Pico la tecla y llama a la funcion principal
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
@@ -41,8 +59,11 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
-            Duck();
+           Duck();
         }
+        
+
+
     }
 
     private void FixedUpdate()
@@ -78,18 +99,25 @@ public class Player : MonoBehaviour
                 SetY(0);
             }
         }
+        
         else if (isDuck)
-        {
+        {            
+            SetC(crouch);
+
             DuckAnimation();
             IncrementY(yMoveInSteps);
             if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime){
                 isDuck = false;
                 DefaultAnimation();
-                SetY(0);
+                SetC(0.5f);
+                
             }
         }
-        IncrementZ(zSpeed * Time.fixedDeltaTime);
-        zSpeed += zAcceleration * Time.fixedDeltaTime;
+
+        walkZ();
+        //IncrementZ(zSpeed * Time.fixedDeltaTime);
+           // zSpeed += zAcceleration * Time.fixedDeltaTime; 
+        
     }
 
     private void SetX(float value)
@@ -103,6 +131,11 @@ public class Player : MonoBehaviour
     private void SetZ(float value)
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value);
+    }
+   
+    private void SetC(float value)
+    {
+        this.transform.localScale = new Vector3 (this.transform.localScale.x, value, this.transform.localScale.z);
     }
 
     private void IncrementX(float value)
@@ -118,15 +151,7 @@ public class Player : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
     }
 
-    private void OnCollisionEnter(Collision collision){
-        if(collision.gameObject.tag == "Finish"){
-            Jump();
-        }
-        //if(collision.gameObject.tag == "Collectable"){
-            //points += 1;
-        //}
-    }
-
+    //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
     {
         if (newPosition.x < 0)
@@ -163,9 +188,16 @@ public class Player : MonoBehaviour
         if (!isJump)
         {
             isJump = true;
+            
             JumpStartTime = Time.realtimeSinceStartupAsDouble;
-            if (isDuck)
-                isDuck = false;
+
+            if (!isDuck){
+                isDuck = true;
+                DuckStartTime = Time.realtimeSinceStartupAsDouble;
+                
+            }
+            
+                
         }
     }
     private void Duck()
@@ -176,10 +208,30 @@ public class Player : MonoBehaviour
         {
             isDuck = true;
             DuckStartTime = Time.realtimeSinceStartupAsDouble;
+            
             yMoveInSteps = -this.transform.position.y * Time.fixedDeltaTime / defaultMoveTime;
-            if(isJump)
+            if(isJump){
+
                 isJump = false;
+                JumpStartTime = Time.realtimeSinceStartupAsDouble;
+
+            }
+                
         }
+    }
+
+    
+
+    private void walkZ()
+    {
+        if(isZ)
+        {
+            IncrementZ(zSpeed * Time.fixedDeltaTime);
+            zSpeed += zAcceleration * Time.fixedDeltaTime; 
+            
+        }
+
+
     }
 
     private void LeftEdgeHit()
