@@ -48,6 +48,9 @@ vehicles, walls, boxes, poles, etc. Crashing results in the game ending. The pla
 enhance their character (eg. running slower, teleport forward, jump higher). Other items could be armour to block one collision. 
 Player needs to reach the finish line to complete each stage/level, and unlock new stages as they go along.
 
+### Video
+https://youtu.be/Kv1iRwkiA5k
+
 ### Technologies
 Project is created with:
 * Unity 2022.1.9f1 
