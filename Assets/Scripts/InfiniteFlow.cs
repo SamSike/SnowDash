@@ -67,7 +67,7 @@ public class InfiniteFlow : MonoBehaviour
 
             tilesInGame.Add(Instantiate(tile1, nextTileSpawn, tile1.transform.rotation));
             nextObstV = nextTileSpawn;
-            nextObstV.x = randX;
+            nextObstV.x = randX * player.GetLaneWidth();
             GameObject obst;
 
             if (randX == -1 || randX == 1)

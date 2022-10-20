@@ -16,11 +16,12 @@ public class Player : MonoBehaviour
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float speedMoveRatio = 5f;
     private float defaultMoveTime = 1f; // in seconds
-    private float defaultJumpTime = 1f;
+    private float defaultJumpTime = 0.5f;
     private Vector3 newPosition;
     private float xMoveInSteps, yMoveInSteps;
-    private float xMove = 1f;
-    private float yMove = 3f;
+    private float xMove;
+    private float yMove = 2f;
+    private float laneWidth = 1.5f;
 
     private float duckSpeed;
     private float zSpeed = 5f;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
         isJump = isDuck = isMoveX  = false;
         defaultScale = this.transform.localScale.y;
         duckSpeed = -yMove * Time.fixedDeltaTime * 1.5f;
+        xMove = laneWidth;
     }
     
     //Taken from Unitys page
@@ -154,6 +156,7 @@ public class Player : MonoBehaviour
     }
     public float GetZSpeed(){ return zSpeed; }
     public bool GetIsGameOver(){ return isGameOver; }
+    public float GetLaneWidth(){ return laneWidth; }
 
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
