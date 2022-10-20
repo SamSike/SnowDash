@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     private void Start(){
         isJump = isDuck = isMoveX  = false;
         defaultScale = this.transform.localScale.y;
-        duckSpeed = -yMove * Time.fixedDeltaTime * 1.5f;
+        duckSpeed = -yMove * Time.fixedDeltaTime * 2f;
         xMove = laneWidth;
     }
     
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
                     RightAnimation();
                 IncrementX(xMoveInSteps);
 
-                if (Time.realtimeSinceStartupAsDouble - MoveXStartTime >= defaultMoveTime)
+                if (Now() - MoveXStartTime >= defaultMoveTime)
                 {
                     isMoveX = false;
                     SetX(newPosition.x);
@@ -92,12 +92,12 @@ public class Player : MonoBehaviour
 
             if (isJump)
             {
-                float jumpAngle = (float)((Time.realtimeSinceStartupAsDouble - JumpStartTime) * 90 / defaultJumpTime);
+                float jumpAngle = (float)((Now() - JumpStartTime) * 90 / defaultJumpTime);
                 float jumpRadians = jumpAngle * Mathf.Deg2Rad;
                 SetY(yMove * Mathf.Sin(jumpRadians));
                 JumpAnimation();
 
-                if (Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultJumpTime * 2)
+                if (Now() - JumpStartTime >= defaultJumpTime * 2)
                 {
                     isJump = false;
                     DefaultAnimation();
@@ -111,10 +111,12 @@ public class Player : MonoBehaviour
                     SetY(0);
                     DuckAnimation();
                 }
-                else
+                else{
+                    DuckStartTime = Now();
                     IncrementY(duckSpeed);
+                }
 
-                if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultJumpTime){
+                if(Now() - DuckStartTime >= defaultJumpTime){
                     isDuck = false;
                     DefaultAnimation();
                 }
@@ -136,12 +138,10 @@ public class Player : MonoBehaviour
     {
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value);
     }
-   
     private void SetC(float value)
     {
         this.transform.localScale = new Vector3 (this.transform.localScale.x, value, this.transform.localScale.z);
     }
-
     private void IncrementX(float value)
     {
         this.transform.position = new Vector3(value + this.transform.position.x, this.transform.position.y, this.transform.position.z);
@@ -158,6 +158,8 @@ public class Player : MonoBehaviour
     public bool GetIsGameOver(){ return isGameOver; }
     public float GetLaneWidth(){ return laneWidth; }
 
+    private double Now(){ return Time.realtimeSinceStartupAsDouble; }
+
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
     {
@@ -166,7 +168,7 @@ public class Player : MonoBehaviour
         else
         {
             isMoveX = true;
-            MoveXStartTime = Time.realtimeSinceStartupAsDouble;
+            MoveXStartTime = Now();
             newPosition += xMove * Vector3.left;
             MoveXStart();
         }
@@ -178,7 +180,7 @@ public class Player : MonoBehaviour
         else
         {
             isMoveX = true;
-            MoveXStartTime = Time.realtimeSinceStartupAsDouble;
+            MoveXStartTime = Now();
             newPosition += xMove * Vector3.right;
             MoveXStart();
         }
@@ -195,7 +197,7 @@ public class Player : MonoBehaviour
         if (!isJump)
         {
             isJump = true;
-            JumpStartTime = Time.realtimeSinceStartupAsDouble;
+            JumpStartTime = Now();
         }
         if (isDuck)
             isDuck = false;                
@@ -208,7 +210,7 @@ public class Player : MonoBehaviour
         if (!isDuck)
         {
             isDuck = true;
-            DuckStartTime = Time.realtimeSinceStartupAsDouble;
+            DuckStartTime = Now();
         }  
 
         if(isJump)
