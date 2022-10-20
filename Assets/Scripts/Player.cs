@@ -56,21 +56,23 @@ public class Player : MonoBehaviour
     //Notas pa que le entieda: Pico la tecla y llama a la funcion principal
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-        {
-            MoveRight();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-        {
-            MoveLeft();
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
-        {
-           Duck();
+        if(!isGameOver){
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            {
+                MoveRight();
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            {
+                MoveLeft();
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+            {
+            Duck();
+            }
         }
     }
 
@@ -213,7 +215,8 @@ public class Player : MonoBehaviour
     private void JumpAnimation()
     {
         // Player Animation when character jumps
-        // SetRotateY((float)((JumpStartTime - Now()) * 360 / defaultJumpTime));
+        // SetRotateY((float)(JumpStartTime - Now()) * 360 / defaultJumpTime);
+        DefaultAnimation();
     }
     private void DefaultAnimation()
     {
