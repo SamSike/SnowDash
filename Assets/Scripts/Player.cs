@@ -12,9 +12,11 @@ public class Player : MonoBehaviour
     // private bool isMovingY = false;
     // private int[] possiblePositionsX = {-5, 0, 5};
     // private Vector3 moveDirection;
-    private bool isJump, isDuck, isMoveX, isZ = true;
+    private bool isJump, isDuck, isMoveX, isGameOver = false;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
+    private float speedMoveRatio = 5f;
     private float defaultMoveTime = 1f; // in seconds
+    private float defaultJumpTime = 1f;
     private Vector3 newPosition;
     private float xMoveInSteps, yMoveInSteps;
     private float xMove = 1f;
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log(collision.GetComponent<Collider>().name);
         if(collision.GetComponent<Collider>().tag == "Finish"){
-            isZ = false;
+            isGameOver = true;
             CollideAnimation();
         }
     }
@@ -69,54 +71,54 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isZ){
-        if (isMoveX)
-        {
-            if (xMoveInSteps > 0)
-                LeftAnimation();
-            else
-                RightAnimation();
-            IncrementX(xMoveInSteps);
-
-            if (Time.realtimeSinceStartupAsDouble - MoveXStartTime >= defaultMoveTime)
+        if(!isGameOver){
+            if (isMoveX)
             {
-                isMoveX = false;
-                SetX(newPosition.x);
-                DefaultAnimation();
+                if (xMoveInSteps > 0)
+                    LeftAnimation();
+                else
+                    RightAnimation();
+                IncrementX(xMoveInSteps);
+
+                if (Time.realtimeSinceStartupAsDouble - MoveXStartTime >= defaultMoveTime)
+                {
+                    isMoveX = false;
+                    SetX(newPosition.x);
+                    DefaultAnimation();
+                }
             }
-        }
 
-        if (isJump)
-        {
-            float jumpAngle = (float)((Time.realtimeSinceStartupAsDouble - JumpStartTime) * 90 / defaultMoveTime);
-            float jumpRadians = jumpAngle * Mathf.Deg2Rad;
-            SetY(yMove * Mathf.Sin(jumpRadians));
-            JumpAnimation();
-
-            if (Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultMoveTime * 2)
+            if (isJump)
             {
-                isJump = false;
-                DefaultAnimation();
-                SetY(0);
-            }
-        }
-        
-        else if (isDuck)
-        {            
-            if(this.transform.position.y <= 0){
-                SetY(0);
-                DuckAnimation();
-            }
-            else
-                IncrementY(duckSpeed);
+                float jumpAngle = (float)((Time.realtimeSinceStartupAsDouble - JumpStartTime) * 90 / defaultJumpTime);
+                float jumpRadians = jumpAngle * Mathf.Deg2Rad;
+                SetY(yMove * Mathf.Sin(jumpRadians));
+                JumpAnimation();
 
-            if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultMoveTime){
-                isDuck = false;
-                DefaultAnimation();
+                if (Time.realtimeSinceStartupAsDouble - JumpStartTime >= defaultJumpTime * 2)
+                {
+                    isJump = false;
+                    DefaultAnimation();
+                    SetY(0);
+                }
             }
-        }
+            
+            else if (isDuck)
+            {            
+                if(this.transform.position.y <= 0){
+                    SetY(0);
+                    DuckAnimation();
+                }
+                else
+                    IncrementY(duckSpeed);
 
-        walkZ();     
+                if(Time.realtimeSinceStartupAsDouble - DuckStartTime >= defaultJumpTime){
+                    isDuck = false;
+                    DefaultAnimation();
+                }
+            }
+
+            walkZ();     
         }   
     }
 
@@ -151,7 +153,7 @@ public class Player : MonoBehaviour
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
     }
     public float GetZSpeed(){ return zSpeed; }
-    public bool GetIsZ(){ return isZ; }
+    public bool GetIsGameOver(){ return isGameOver; }
 
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
@@ -217,6 +219,7 @@ public class Player : MonoBehaviour
     {
         IncrementZ(zSpeed * Time.fixedDeltaTime);
         zSpeed += zAcceleration * Time.fixedDeltaTime;
+        defaultMoveTime = speedMoveRatio / zSpeed;
     }
 
     private void LeftEdgeHit()
