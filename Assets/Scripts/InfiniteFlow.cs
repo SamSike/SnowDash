@@ -10,18 +10,18 @@ public class InfiniteFlow : MonoBehaviour
     public GameObject tree1;
     public GameObject branch1;
     public GameObject treeStump1;
-
-    public Camera mainCamera;
     public Player player;
     private List<GameObject> tilesInGame;
     private List<GameObject> obstaclesInGame;
 
     private List<GameObject> obstacles;
     private List<GameObject> edgeObstacles;
-    
+
     private int randX;
     private float tileSize = 20;
-    
+
+    private int offset = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,23 +41,28 @@ public class InfiniteFlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        try{
-            if(tilesInGame[0].transform.position.z + tileSize < mainCamera.transform.position.z){
+        try
+        {
+            if (tilesInGame[0].transform.position.z + tileSize < player.transform.position.z - offset)
+            {
                 Destroy(tilesInGame[0]);
                 tilesInGame.RemoveAt(0);
             }
-            if(obstaclesInGame[0].transform.position.z < mainCamera.transform.position.z){
+            if (obstaclesInGame[0].transform.position.z < player.transform.position.z - offset)
+            {
                 Destroy(obstaclesInGame[0]);
                 obstaclesInGame.RemoveAt(0);
             }
         }
-        catch(System.ArgumentOutOfRangeException e){
+        catch (System.ArgumentOutOfRangeException e)
+        {
             ;
         }
     }
     IEnumerator spawnTile()
     {
-        if(player.GetIsZ()){
+        if (player.GetIsZ())
+        {
             yield return new WaitForSeconds(tileSize / (2 * player.GetZSpeed()));
             randX = Random.Range(-1, 2);
 
