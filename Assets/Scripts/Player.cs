@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
     private void CollideAnimation()
     {
         // Player Animation when character collides with obstacle
-        DefaultAnimation();
+        //DefaultAnimation();
     }
     private void LeftAnimation()
     {

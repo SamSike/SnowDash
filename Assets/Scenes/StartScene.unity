@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.067819424, g: 0.273946, b: 0.4846446, a: 1}
+  m_IndirectSpecularColor: {r: 0.06781944, g: 0.27394506, b: 0.484644, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1701,7 +1701,7 @@ Transform:
   - {fileID: 2907834}
   - {fileID: 31802436}
   - {fileID: 1457055054}
-  - {fileID: 1081147066}
+  - {fileID: 1065452584}
   - {fileID: 988417722}
   - {fileID: 644320091}
   - {fileID: 533533988}
@@ -3981,11 +3981,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 62fa28cbb204e4546a2ad5c1580ee188, type: 3}
   m_PrefabInstance: {fileID: 1657203573}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1081147066 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5123770671249813713, guid: a6f62c0263b89ab4399075b6c7d32bc8, type: 3}
-  m_PrefabInstance: {fileID: 2251334500252646266}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1086477590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4372,10 +4367,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26010701778b4493f949e1a1734f1c36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile1: {fileID: 1804159483}
-  tree1: {fileID: 3425890022010720264, guid: 584484346fa7d4d26891fb6c8cece232, type: 3}
-  branch1: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
-  treeStump1: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
+  tile: {fileID: 1804159483}
+  bigObject: {fileID: 3425890022010720264, guid: 584484346fa7d4d26891fb6c8cece232, type: 3}
+  duckObject: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
+  jumpObject: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
   player: {fileID: 9045837020752623995}
 --- !u!4 &1221878913
 Transform:
