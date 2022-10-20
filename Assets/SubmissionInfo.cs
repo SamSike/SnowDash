@@ -26,7 +26,7 @@ public static class SubmissionInfo
 
     // This may be a "working title" to begin with, but ensure it is final by
     // the video milestone deadline (plain text, no more than 50 chars).
-    public static readonly string GameName = "Running Man";
+    public static readonly string GameName = "Snow dash";
 
     // Write a brief blurb of your game, no more than 200 words. Again, ensure
     // this is final by the video milestone deadline.
@@ -42,7 +42,7 @@ Player needs to reach the finish line to complete each stage/level, and unlock n
     // By the gameplay video milestone deadline this should be a direct link
     // to a YouTube video upload containing your video. Ensure "Made for kids"
     // is turned off in the video settings. 
-    public static readonly string GameplayVideo = "https://youtube.com/...";
+    public static readonly string GameplayVideo = "https://youtu.be/Kv1iRwkiA5k";
     
     // No more info to fill out!
     // Please don't modify anything below here.

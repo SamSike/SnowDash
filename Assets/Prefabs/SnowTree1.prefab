@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2648367812643474098}
   - component: {fileID: 1400408288578651415}
   - component: {fileID: 3786340513589670365}
-  - component: {fileID: 2542947207297641815}
+  - component: {fileID: 6060549041300384935}
   m_Layer: 0
   m_Name: SnowTree1
   m_TagString: Finish
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3425890022010720264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2542947207297641815
-BoxCollider:
+--- !u!64 &6060549041300384935
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,6 +94,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.042840905, y: 0.047455955, z: 0.071215585}
-  m_Center: {x: 0.00055580866, y: 0, z: 0.03412555}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6013495205288010354, guid: 98000ac43d9a69f43b3fcd80b2afc8e7, type: 3}
