@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private float yMove = 2f;
     private float laneWidth = 1.5f;
 
+    private float rotateLeft = -45;
+    private float rotateRight;
     private float duckSpeed;
     private float zSpeed = 5f;
     private float zAcceleration = 0.5f;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
         defaultScale = this.transform.localScale.y;
         duckSpeed = -yMove * Time.fixedDeltaTime * 2f;
         xMove = laneWidth;
+        rotateRight = -rotateLeft;
     }
     
     //Taken from Unitys page
@@ -76,12 +79,7 @@ public class Player : MonoBehaviour
         if(!isGameOver){
             if (isMoveX)
             {
-                if (xMoveInSteps > 0)
-                    LeftAnimation();
-                else
-                    RightAnimation();
                 IncrementX(xMoveInSteps);
-
                 if (Now() - MoveXStartTime >= defaultMoveTime)
                 {
                     isMoveX = false;
@@ -126,40 +124,6 @@ public class Player : MonoBehaviour
         }   
     }
 
-    private void SetX(float value)
-    {
-        this.transform.position = new Vector3(value, this.transform.position.y, this.transform.position.z);
-    }
-    private void SetY(float value)
-    {
-        this.transform.position = new Vector3(this.transform.position.x, value, this.transform.position.z);
-    }
-    private void SetZ(float value)
-    {
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value);
-    }
-    private void SetC(float value)
-    {
-        this.transform.localScale = new Vector3 (this.transform.localScale.x, value, this.transform.localScale.z);
-    }
-    private void IncrementX(float value)
-    {
-        this.transform.position = new Vector3(value + this.transform.position.x, this.transform.position.y, this.transform.position.z);
-    }
-    private void IncrementY(float value)
-    {
-        this.transform.position = new Vector3(this.transform.position.x, value + this.transform.position.y, this.transform.position.z);
-    }
-    private void IncrementZ(float value)
-    {
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
-    }
-    public float GetZSpeed(){ return zSpeed; }
-    public bool GetIsGameOver(){ return isGameOver; }
-    public float GetLaneWidth(){ return laneWidth; }
-
-    private double Now(){ return Time.realtimeSinceStartupAsDouble; }
-
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
     private void MoveLeft()
     {
@@ -171,6 +135,7 @@ public class Player : MonoBehaviour
             MoveXStartTime = Now();
             newPosition += xMove * Vector3.left;
             MoveXStart();
+            LeftAnimation();
         }
     }
     private void MoveRight()
@@ -183,6 +148,7 @@ public class Player : MonoBehaviour
             MoveXStartTime = Now();
             newPosition += xMove * Vector3.right;
             MoveXStart();
+            RightAnimation();
         }
     }
     private void MoveXStart()
@@ -198,6 +164,7 @@ public class Player : MonoBehaviour
         {
             isJump = true;
             JumpStartTime = Now();
+            SetCrouch(0);
         }
         if (isDuck)
             isDuck = false;                
@@ -213,42 +180,46 @@ public class Player : MonoBehaviour
             DuckStartTime = Now();
         }  
 
-        if(isJump)
+        if(isJump){
             isJump = false;
+            if(!isMoveX)
+                DefaultAnimation();
+        }
         
     }
 
-    
-
+    private double Now(){ return Time.realtimeSinceStartupAsDouble; }
     private void walkZ()
     {
         IncrementZ(zSpeed * Time.fixedDeltaTime);
         zSpeed += zAcceleration * Time.fixedDeltaTime;
         defaultMoveTime = speedMoveRatio / zSpeed;
     }
-
     private void LeftEdgeHit()
     {
         // Player Animation when character hits left edge
+        // Also slow down player movement to make it harder
     }
     private void RightEdgeHit()
     {
         // Player Animation when character hits right edge
+        // Also slow down player movement to make it harder
     }
     private void DuckAnimation()
     {
         // Player Animation when character ducks 
-        SetC(crouch);
+        SetCrouch(crouch);
     }
     private void JumpAnimation()
     {
         // Player Animation when character jumps
-        DefaultAnimation();
+        // SetRotateY((float)((JumpStartTime - Now()) * 360 / defaultJumpTime));
     }
     private void DefaultAnimation()
     {
         // Default Player Animation
-        SetC(defaultScale);
+        SetCrouch(defaultScale);
+        SetRotateY(0);
     }
     private void CollideAnimation()
     {
@@ -258,9 +229,47 @@ public class Player : MonoBehaviour
     private void LeftAnimation()
     {
         // Player Animation when character moves left
+        SetRotateY(rotateLeft);
     }
     private void RightAnimation()
     {
         // Player Animation when character moves right
+        SetRotateY(rotateRight);
     }
+
+    private void SetX(float value)
+    {
+        this.transform.position = new Vector3(value, this.transform.position.y, this.transform.position.z);
+    }
+    private void SetY(float value)
+    {
+        this.transform.position = new Vector3(this.transform.position.x, value, this.transform.position.z);
+    }
+    private void SetZ(float value)
+    {
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value);
+    }
+    private void SetCrouch(float value)
+    {
+        this.transform.localScale = new Vector3 (this.transform.localScale.x, value, this.transform.localScale.z);
+    }
+    private void IncrementX(float value)
+    {
+        this.transform.position = new Vector3(value + this.transform.position.x, this.transform.position.y, this.transform.position.z);
+    }
+    private void IncrementY(float value)
+    {
+        this.transform.position = new Vector3(this.transform.position.x, value + this.transform.position.y, this.transform.position.z);
+    }
+    private void IncrementZ(float value)
+    {
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, value + this.transform.position.z);
+    }
+    private void SetRotateY(float value)
+    {
+        this.transform.eulerAngles = new Vector3(this.transform.rotation.x, value, this.transform.rotation.z);
+    }
+    public float GetZSpeed(){ return zSpeed; }
+    public bool GetIsGameOver(){ return isGameOver; }
+    public float GetLaneWidth(){ return laneWidth; }
 }
