@@ -17,29 +17,29 @@ public class PowerUp : MonoBehaviour
         Instantiate(pickupEffect, transform.position, transform.rotation);
 
         if(this.name == "Armor"){
-                //Add Armor to Player.
-                Debug.Log("Power Up is Armor");
-            }
-            if(this.name == "Invicible"){
-                //Add Invisibility to Player.
-                Debug.Log("Power Up is Invisible");
-            }
-            if(this.name == "JumpHigher"){
-                //Add Jump Boost to Player.
-                Debug.Log("Power Up is Jump Higher");
-            }
-            if(this.name == "PointsMultiplier"){
-                //Add Points Multiplier to Player.
-                Debug.Log("Power Up is Multiply Points");
-            }
-            if(this.name == "SlowTime"){
-                //Slow Time to Player.
-                Debug.Log("Power Up is Slow Time");
-            }
-            if(this.name == "TeleportForward"){
-                //Add Speed Boost to Player.
-                Debug.Log("Power Up is Teleport");
-            }
+            //Add Armor to Player.
+            Debug.Log("Power Up is Armor");
+        }
+        if(this.name == "Invicible"){
+            //Add Invisibility to Player.
+            Debug.Log("Power Up is Invisible");
+        }
+        if(this.name == "JumpHigher"){
+            //Add Jump Boost to Player.
+            Debug.Log("Power Up is Jump Higher");
+        }
+        if(this.name == "PointsMultiplier"){
+            //Add Points Multiplier to Player.
+            Debug.Log("Power Up is Multiply Points");
+        }
+        if(this.name == "SlowTime"){
+            //Slow Time to Player.
+            Debug.Log("Power Up is Slow Time");
+        }
+        if(this.name == "TeleportForward"){
+            //Add Speed Boost to Player.
+            Debug.Log("Power Up is Teleport");
+        }
 
         //player.transform.localScale *= multiplier;
 
