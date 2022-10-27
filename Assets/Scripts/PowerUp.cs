@@ -16,13 +16,38 @@ public class PowerUp : MonoBehaviour
     IEnumerator pickUp(Collider player){
         Instantiate(pickupEffect, transform.position, transform.rotation);
 
-        player.transform.localScale *= multiplier;
+        if(this.name == "Armor"){
+                //Add Armor to Player.
+                Debug.Log("Power Up is Armor");
+            }
+            if(this.name == "Invicible"){
+                //Add Invisibility to Player.
+                Debug.Log("Power Up is Invisible");
+            }
+            if(this.name == "JumpHigher"){
+                //Add Jump Boost to Player.
+                Debug.Log("Power Up is Jump Higher");
+            }
+            if(this.name == "PointsMultiplier"){
+                //Add Points Multiplier to Player.
+                Debug.Log("Power Up is Multiply Points");
+            }
+            if(this.name == "SlowTime"){
+                //Slow Time to Player.
+                Debug.Log("Power Up is Slow Time");
+            }
+            if(this.name == "TeleportForward"){
+                //Add Speed Boost to Player.
+                Debug.Log("Power Up is Teleport");
+            }
+
+        //player.transform.localScale *= multiplier;
 
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
 
         yield return new WaitForSeconds(duration);
-        player.transform.localScale /= multiplier;
+        //player.transform.localScale /= multiplier;
         Destroy(gameObject);
     }
 
