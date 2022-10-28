@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class InfiniteFlow : MonoBehaviour
 {
-    public GameObject tile;
+    private GameObject tile;
+    private ObstacleList ObstacleList;
+
     private Vector3 nextTileSpawn;
     private Vector3 nextObstV;
     public Player player;
 
+    // Tiles for all themes
+    public ThemedTiles ThemedTiles;
+
     // Obstacles for all themes
-    public ObstacleSnowList ObstacleSnowList;
+    public ThemedObstacleList ThemedObstacleList;
 
     // List of Powerups
     public PowerUpList PowerUpList;
@@ -28,11 +33,14 @@ public class InfiniteFlow : MonoBehaviour
     private bool trulyRandom = true;
     private int trueRandomLength = 600;
     private int pseudoRandomLength = 300;
+    private int themeLength = 400;
 
     // Start is called before the first frame update
     void Start()
     {
         nextTileSpawn.z = 60;
+        tile = ThemedTiles.snowTile;
+        ObstacleList = ThemedObstacleList.ObstacleSnowList;
 
         StartCoroutine(spawnItems());
         tilesInGame = new List<GameObject>();
@@ -62,8 +70,23 @@ public class InfiniteFlow : MonoBehaviour
         
         spawnObstacle(randX);
         spawnPowerup();
+        randomTheme();
 
         nextTileSpawn.z += tileSize;
+    }
+
+    private void randomTheme(){
+        if(nextObstV.z % themeLength == 0){
+            var current = ThemedTiles.tileList.IndexOf(tile);
+            while(true){
+                var newTheme = Random.Range(0, ThemedTiles.tileList.Count);
+                if(newTheme != current){    
+                    tile = ThemedTiles.tileList[newTheme];
+                    ObstacleList = ThemedObstacleList.ThemedList[newTheme];
+                    break;
+                }
+            }
+        }
     }
 
     private void spawnPowerup(){
@@ -84,19 +107,19 @@ public class InfiniteFlow : MonoBehaviour
         GameObject obstacle;
         if (type == -1 || type == 1)
         {
-            obstacle = ObstacleSnowList.edgeObstacles[Random.Range(0, ObstacleSnowList.edgeObstacles.Count)];
+            obstacle = ObstacleList.edgeObstacles[Random.Range(0, ObstacleList.edgeObstacles.Count)];
         }
         else if (type == -2 || type == 2)
         {
-            obstacle = ObstacleSnowList.doubleObject;
+            obstacle = ObstacleList.doubleObject;
             nextObstV.x /= 4;
         }
         else
         {
-            obstacle = ObstacleSnowList.obstacles[Random.Range(0, ObstacleSnowList.obstacles.Count)];
+            obstacle = ObstacleList.obstacles[Random.Range(0, ObstacleList.obstacles.Count)];
         }
 
-        if (obstacle == ObstacleSnowList.duckObject) 
+        if (obstacle == ObstacleList.duckObject) 
             nextObstV.y = 0.75f;
 
         obstaclesInGame.Add(Instantiate(obstacle, nextObstV, obstacle.transform.rotation));

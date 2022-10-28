@@ -5,13 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
-
-    
-    
-    // private bool isMovingX = false;
-    // private bool isMovingY = false;
-    // private int[] possiblePositionsX = {-5, 0, 5};
-    // private Vector3 moveDirection;
     private bool isJump, isDuck, isMoveX, isGameOver = false;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float speedMoveRatio = 5f;
@@ -26,7 +19,7 @@ public class Player : MonoBehaviour
     private float rotateLeft = -45;
     private float rotateRight;
     private float duckSpeed;
-    private float zSpeed = 25f;
+    private float zSpeed = 15f;
     private float zAcceleration = 0.2f;
     
     //The re-sizing of the y scale to give the effect of dunk
