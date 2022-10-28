@@ -46,9 +46,9 @@ public class Player : MonoBehaviour
     //Taken from Unitys page
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(collision.GetComponent<Collider>().name);
         if(collision.GetComponent<Collider>().tag == "Finish"){
-            isGameOver = true;
+            isGameOver = true;        
+            Debug.Log(collision.GetComponent<Collider>().name);
             CollideAnimation();
         }
     }
