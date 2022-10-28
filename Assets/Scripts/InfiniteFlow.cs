@@ -25,6 +25,8 @@ public class InfiniteFlow : MonoBehaviour
     private int offset = 5;
     private float powerUpOffset = 500;
 
+    private bool trulyRandom = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,7 +103,18 @@ public class InfiniteFlow : MonoBehaviour
     private int RandomCustom(){
         // Values to be returned: [-1, 0, 1]
         // Return -2 or 2 for stack of trees in that position
-        return Random.Range(-2, 3);
+        if(nextObstV.z % 300 == 0)
+                trulyRandom = !trulyRandom;
+
+        if(trulyRandom){
+            return Random.Range(-2,3);
+        }
+        else{
+            if(nextObstV.z % 40 == 0)
+                return -2;
+            else    
+                return 2;
+        }
     }
 
     private void DestroyIrrelevant(){

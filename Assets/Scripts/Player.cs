@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
     private float rotateLeft = -45;
     private float rotateRight;
     private float duckSpeed;
-    private float zSpeed = 5f;
-    private float zAcceleration = 0.5f;
+    private float zSpeed = 25f;
+    private float zAcceleration = 0.2f;
     
     //The re-sizing of the y scale to give the effect of dunk
     private float crouch = 0.3f;
