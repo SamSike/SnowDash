@@ -692,8 +692,6 @@ MonoBehaviour:
   duckObject: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
   jumpObject: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
   doubleObject: {fileID: 240736036637017740, guid: 29c3c69d62eb9c947b19b7fabb648457, type: 3}
-  obstacles: []
-  edgeObstacles: []
 --- !u!4 &132088916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4235566955999968, guid: ea4fb55d0227e604386f44f905cfe7c0, type: 3}
@@ -3313,12 +3311,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 1804159483}
   player: {fileID: 9045837020752623995}
-  bigObject: {fileID: 5195130642784693445, guid: f5df276ca8db56049849b11899004d48, type: 3}
-  duckObject: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
-  jumpObject: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
-  doubleObject: {fileID: 240736036637017740, guid: 29c3c69d62eb9c947b19b7fabb648457, type: 3}
-  ObstacleSnowList: {fileID: 122616008}
-  PowerUpList: {fileID: 1392601655}
+  ObstacleSnowList: {fileID: 122616010}
+  PowerUpList: {fileID: 1392601656}
 --- !u!4 &1221878913
 Transform:
   m_ObjectHideFlags: 0
