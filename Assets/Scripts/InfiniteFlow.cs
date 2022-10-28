@@ -7,38 +7,33 @@ public class InfiniteFlow : MonoBehaviour
     public GameObject tile;
     private Vector3 nextTileSpawn;
     private Vector3 nextObstV;
-    public GameObject bigObject;
-    public GameObject duckObject;
-    public GameObject jumpObject;
-    public GameObject doubleObject;
     public Player player;
+
+    // Obstacles for all themes
+    public ObstacleSnowList ObstacleSnowList;
+
+    // List of Powerups
+    public PowerUpList PowerUpList;
+
     private List<GameObject> tilesInGame;
     private List<GameObject> obstaclesInGame;
-
-    private List<GameObject> obstacles;
-    private List<GameObject> edgeObstacles;
+    private List<GameObject> powerupsInGame;
 
     private int randX;
     private float tileSize = 20;
 
     private int offset = 5;
+    private float powerUpOffset = 500;
 
     // Start is called before the first frame update
     void Start()
     {
         nextTileSpawn.z = 60;
 
-        obstacles = new List<GameObject>();
-        obstacles.Add(bigObject);
-        obstacles.Add(jumpObject);
-
-        edgeObstacles = new List<GameObject>();
-        edgeObstacles.AddRange(obstacles);
-        edgeObstacles.Add(duckObject);
-
         StartCoroutine(spawnItems());
         tilesInGame = new List<GameObject>();
         obstaclesInGame = new List<GameObject>();
+        powerupsInGame = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -60,27 +55,47 @@ public class InfiniteFlow : MonoBehaviour
 
         tilesInGame.Add(Instantiate(tile, nextTileSpawn, tile.transform.rotation));
         nextObstV = nextTileSpawn;
-        nextObstV.x = randX * player.GetLaneWidth();
-        GameObject obst;
+        
+        spawnObstacle(randX);
+        spawnPowerup();
 
-        if (randX == -1 || randX == 1)
-        {
-            obst = edgeObstacles[Random.Range(0, edgeObstacles.Count)];
+        nextTileSpawn.z += tileSize;
+    }
+
+    private void spawnPowerup(){
+        if(nextObstV.z % powerUpOffset == 0 && Random.Range(0,2) == 0){
+            randX = Random.Range(-1,2);
+            nextObstV.x = randX * player.GetLaneWidth();
+            nextObstV.z += tileSize/2;
+
+            GameObject powerup = PowerUpList.powerups[Random.Range(0, PowerUpList.powerups.Count)];
+
+            powerupsInGame.Add(Instantiate(powerup, nextObstV, powerup.transform.rotation));
         }
-        else if (randX == -2 || randX == 2)
+    }
+
+    private void spawnObstacle(int type){        
+        nextObstV.x = type * player.GetLaneWidth();
+
+        GameObject obstacle;
+        if (type == -1 || type == 1)
         {
-            obst = doubleObject;
-            nextObstV.x/=4;
+            obstacle = ObstacleSnowList.edgeObstacles[Random.Range(0, ObstacleSnowList.edgeObstacles.Count)];
+        }
+        else if (type == -2 || type == 2)
+        {
+            obstacle = ObstacleSnowList.doubleObject;
+            nextObstV.x /= 4;
         }
         else
         {
-            obst = obstacles[Random.Range(0, obstacles.Count)];
+            obstacle = ObstacleSnowList.obstacles[Random.Range(0, ObstacleSnowList.obstacles.Count)];
         }
 
-        if (obst == duckObject) nextObstV.y = 0.75f;
-        obstaclesInGame.Add(Instantiate(obst, nextObstV, obst.transform.rotation));
+        if (obstacle == ObstacleSnowList.duckObject) 
+            nextObstV.y = 0.75f;
 
-        nextTileSpawn.z += 20;
+        obstaclesInGame.Add(Instantiate(obstacle, nextObstV, obstacle.transform.rotation));
     }
 
     private int RandomCustom(){
@@ -101,6 +116,11 @@ public class InfiniteFlow : MonoBehaviour
             {
                 Destroy(obstaclesInGame[0]);
                 obstaclesInGame.RemoveAt(0);
+            }
+            if (powerupsInGame[0].transform.position.z < player.transform.position.z - offset)
+            {
+                Destroy(powerupsInGame[0]);
+                powerupsInGame.RemoveAt(0);
             }
         }
         catch (System.ArgumentOutOfRangeException e)

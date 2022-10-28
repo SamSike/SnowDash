@@ -20,9 +20,9 @@ public class PowerUp : MonoBehaviour
             //Add Armor to Player.
             Debug.Log("Power Up is Armor");
         }
-        if(this.name == "Invicible"){
+        if(this.name == "Invincible"){
             //Add Invisibility to Player.
-            Debug.Log("Power Up is Invisible");
+            Debug.Log("Power Up is Invincible");
         }
         if(this.name == "JumpHigher"){
             //Add Jump Boost to Player.
