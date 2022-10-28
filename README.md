@@ -41,7 +41,7 @@ For more details you can find a guide [here](https://docs.github.com/en/github/w
 * [Code Snipets](#code-snippets)
 
 ### Game Summary
-Running Man is a runner game, the main goal of this game is to get to the highest stage possible
+Snow Dash is an endless runner game, where the main goal of this game is to get to the highest stage possible
 while not crashing into any obstacles. While running, the player can move up, down, left, or right, 
 corresponding to the direction they want to move, to avoid crashing into oncoming obstacles, such as 
 vehicles, walls, boxes, poles, etc. Crashing results in the game ending. The player can collect various items/power ups to 
