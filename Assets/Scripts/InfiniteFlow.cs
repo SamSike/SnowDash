@@ -10,6 +10,7 @@ public class InfiniteFlow : MonoBehaviour
     public GameObject bigObject;
     public GameObject duckObject;
     public GameObject jumpObject;
+    public GameObject doubleObject;
     public Player player;
     private List<GameObject> tilesInGame;
     private List<GameObject> obstaclesInGame;
@@ -35,7 +36,7 @@ public class InfiniteFlow : MonoBehaviour
         edgeObstacles.AddRange(obstacles);
         edgeObstacles.Add(duckObject);
 
-        StartCoroutine(spawnTile());
+        StartCoroutine(spawnItems());
         tilesInGame = new List<GameObject>();
         obstaclesInGame = new List<GameObject>();
     }
@@ -45,38 +46,47 @@ public class InfiniteFlow : MonoBehaviour
     {
         DestroyIrrelevant();
     }
-    IEnumerator spawnTile()
+    IEnumerator spawnItems()
     {
         if(!player.GetIsGameOver()){
             yield return new WaitForSeconds(tileSize / (2 * player.GetZSpeed()));
-            randX = Random.Range(-1, 2);
-
-            tilesInGame.Add(Instantiate(tile, nextTileSpawn, tile.transform.rotation));
-            nextObstV = nextTileSpawn;
-            nextObstV.x = randX * player.GetLaneWidth();
-            GameObject obst;
-
-            if (randX == -1 || randX == 1)
-            {
-                obst = edgeObstacles[Random.Range(0, edgeObstacles.Count)];
-            }
-            else
-            {
-                obst = obstacles[Random.Range(0, obstacles.Count)];
-            }
-
-            if (obst == duckObject) nextObstV.y = 0.75f;
-            obstaclesInGame.Add(Instantiate(obst, nextObstV, obst.transform.rotation));
-
-            nextTileSpawn.z += 20;
-            StartCoroutine(spawnTile());
+            spawnTile();
+            StartCoroutine(spawnItems());
         }
+    }
+
+    private void spawnTile(){
+        randX = RandomCustom();
+
+        tilesInGame.Add(Instantiate(tile, nextTileSpawn, tile.transform.rotation));
+        nextObstV = nextTileSpawn;
+        nextObstV.x = randX * player.GetLaneWidth();
+        GameObject obst;
+
+        if (randX == -1 || randX == 1)
+        {
+            obst = edgeObstacles[Random.Range(0, edgeObstacles.Count)];
+        }
+        else if (randX == -2 || randX == 2)
+        {
+            obst = doubleObject;
+            nextObstV.x/=4;
+        }
+        else
+        {
+            obst = obstacles[Random.Range(0, obstacles.Count)];
+        }
+
+        if (obst == duckObject) nextObstV.y = 0.75f;
+        obstaclesInGame.Add(Instantiate(obst, nextObstV, obst.transform.rotation));
+
+        nextTileSpawn.z += 20;
     }
 
     private int RandomCustom(){
         // Values to be returned: [-1, 0, 1]
         // Return -2 or 2 for stack of trees in that position
-        return Random.Range(-1, 2);
+        return Random.Range(-2, 3);
     }
 
     private void DestroyIrrelevant(){
