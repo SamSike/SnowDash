@@ -14,14 +14,14 @@ public class PowerUp : MonoBehaviour
     }
 
     IEnumerator pickUp(Collider player){
-        Instantiate(pickupEffect, transform.position, transform.rotation);
+        var effect = Instantiate(pickupEffect, transform.position, transform.rotation);
 
         if(this.name == "Armor"){
             //Add Armor to Player.
             Debug.Log("Power Up is Armor");
         }
         if(this.name == "Invincible"){
-            //Add Invisibility to Player.
+            //Add Invincibility to Player.
             Debug.Log("Power Up is Invincible");
         }
         if(this.name == "JumpHigher"){
@@ -48,6 +48,7 @@ public class PowerUp : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
         //player.transform.localScale /= multiplier;
+        Destroy(effect);
         Destroy(gameObject);
     }
 

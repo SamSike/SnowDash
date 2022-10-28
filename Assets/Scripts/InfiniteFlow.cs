@@ -26,6 +26,8 @@ public class InfiniteFlow : MonoBehaviour
     private float powerUpOffset = 500;
 
     private bool trulyRandom = true;
+    private int trueRandomLength = 600;
+    private int pseudoRandomLength = 300;
 
     // Start is called before the first frame update
     void Start()
@@ -103,14 +105,16 @@ public class InfiniteFlow : MonoBehaviour
     private int RandomCustom(){
         // Values to be returned: [-1, 0, 1]
         // Return -2 or 2 for stack of trees in that position
-        if(nextObstV.z % 300 == 0)
-                trulyRandom = !trulyRandom;
-
         if(trulyRandom){
+            if(nextObstV.z % trueRandomLength == 0 && Random.Range(0, 10) < 3)
+                trulyRandom = false;
             return Random.Range(-2,3);
         }
         else{
-            if(nextObstV.z % 40 == 0)
+            if(nextObstV.z % pseudoRandomLength == 0)
+                trulyRandom = true;
+
+            if(nextObstV.z % (2 * tileSize) == 0)
                 return -2;
             else    
                 return 2;
