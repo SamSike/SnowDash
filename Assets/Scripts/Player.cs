@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float xMoveInSteps, yMoveInSteps;
     private float xMove;
     private float yMove = 2f;
-    private float laneWidth = 1.5f;
+    private float laneWidth = 1.75f;
 
     private float rotateLeft = -45;
     private float rotateRight;
