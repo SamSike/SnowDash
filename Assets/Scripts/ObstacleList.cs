@@ -10,8 +10,8 @@ public class ObstacleList : MonoBehaviour
     public GameObject jumpObject;
     public GameObject doubleObject;
 
-    public static List<GameObject> obstacles;
-    public static List<GameObject> edgeObstacles;
+    private List<GameObject> obstacles;
+    private List<GameObject> edgeObstacles;
 
     // Start is called before the first frame update
     void Start()
@@ -24,4 +24,7 @@ public class ObstacleList : MonoBehaviour
         edgeObstacles.AddRange(obstacles);
         edgeObstacles.Add(duckObject);        
     }
+
+    public GameObject GetRandomObstacle(){ return obstacles[Random.Range(0, obstacles.Count)]; }
+    public GameObject GetRandomEdgeObstacle(){ return edgeObstacles[Random.Range(0, edgeObstacles.Count)]; }
 }

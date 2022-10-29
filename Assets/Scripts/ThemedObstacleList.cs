@@ -8,7 +8,7 @@ public class ThemedObstacleList : MonoBehaviour
     public ObstacleList ObstacleLavaList;
     public ObstacleList ObstacleDesertList;
 
-    public List<ObstacleList> ThemedList;
+    private List<ObstacleList> ThemedList;
 
     // Start is called before the first frame update
     void Start()
@@ -19,4 +19,5 @@ public class ThemedObstacleList : MonoBehaviour
         ThemedList.Add(ObstacleDesertList);    
     }
 
+    public ObstacleList GetTheme(int index){ return ThemedList[index]; }
 }
