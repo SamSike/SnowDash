@@ -12,29 +12,30 @@ public class TextOnScreen : MonoBehaviour
     public Text gameOverScore;
 
     private float fadeWaitTime = 1f;
+    private float gameOverdelay = 1f;
 
     void Start(){
         StartCoroutine(Tutorial());
+        StartCoroutine(GameOver());
     }
 
     void Update()
     {
         scoreText.text = "SCORE: "+ player.transform.position.z.ToString("0");
-        if(player.GetIsGameOver()){
-            gameOver.text = "GAME OVER";
-            gameOverScore.text = scoreText.text;
-        }
     }
 
     IEnumerator Tutorial(){
         yield return new WaitForSeconds(1);
-        tutorialText.text = "Press Arrow Keys or WASD to Move";
+        if(!player.GetIsGameOver())
+            tutorialText.text = "Press Arrow Keys or WASD to Move";
         StartCoroutine(Fade());
         yield return new WaitForSeconds(4);
-        tutorialText.text = "Space to Jump";
+        if(!player.GetIsGameOver())
+            tutorialText.text = "Space to Jump";
         StartCoroutine(Fade());
         yield return new WaitForSeconds(4);
-        tutorialText.text = "Shift to Duck";
+        if(!player.GetIsGameOver())
+            tutorialText.text = "Shift to Duck";
         StartCoroutine(Fade());
     }
 
@@ -46,5 +47,15 @@ public class TextOnScreen : MonoBehaviour
             tutorialText.color = new Color(tutorialText.color.r, tutorialText.color.g, tutorialText.color.b, i);
         }
         tutorialText.color = new Color(tutorialText.color.r, tutorialText.color.g, tutorialText.color.b, 0);
+    }
+    IEnumerator GameOver(){
+        while(!player.GetIsGameOver())
+            yield return new WaitForSeconds(gameOverdelay);
+        gameOver.text = "GAME OVER";
+        gameOverScore.text = scoreText.text;
+
+        scoreText.text = "";
+        highScoretext.text = "";
+        tutorialText.text = "";
     }
 }

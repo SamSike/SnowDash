@@ -4068,7 +4068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add949d320d5a7347ab6dffac4a5a74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 9045837020752623994}
+  player: {fileID: 9045837020752623995}
   scoreText: {fileID: 1739338330}
   highScoretext: {fileID: 11840118}
   tutorialText: {fileID: 1648600837}
@@ -4897,7 +4897,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e0a1e66418274594eab1b67b2b664901, type: 3}
+    m_Font: {fileID: 12800000, guid: aef8f3fc7c348784f90a23a198c89cee, type: 3}
     m_FontSize: 75
     m_FontStyle: 1
     m_BestFit: 0
