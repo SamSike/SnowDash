@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InfiniteFlow : MonoBehaviour
 {
-    public GameObject tile;
-    public ObstacleList ObstacleList;
+    private GameObject tile;
+    private ObstacleList ObstacleList;
 
     private Vector3 nextTileSpawn;
     private Vector3 nextObstV;
@@ -77,14 +77,12 @@ public class InfiniteFlow : MonoBehaviour
 
     private void randomTheme(){
         if(nextObstV.z % themeLength == 0){
-            var current = ThemedTiles.tileList.IndexOf(tile);
+            var current = ThemedTiles.FindTile(tile);
             while(true){
-                var newTheme = Random.Range(0, ThemedTiles.tileList.Count);
+                var newTheme = Random.Range(0, ThemedTiles.GetListCount());
                 if(newTheme != current){    
-                    tile = ThemedTiles.tileList[newTheme];
-                    ObstacleList = ThemedObstacleList.ThemedList[newTheme];
-
-                    Debug.Log("Changed theme to: ", tile);
+                    tile = ThemedTiles.GetTheme(newTheme);
+                    ObstacleList = ThemedObstacleList.GetTheme(newTheme);
                     break;
                 }
             }
@@ -109,7 +107,7 @@ public class InfiniteFlow : MonoBehaviour
         GameObject obstacle;
         if (type == -1 || type == 1)
         {
-            obstacle = ObstacleList.edgeObstacles[Random.Range(0, ObstacleList.edgeObstacles.Count)];
+            obstacle = ObstacleList.GetRandomEdgeObstacle();
         }
         else if (type == -2 || type == 2)
         {
@@ -118,7 +116,7 @@ public class InfiniteFlow : MonoBehaviour
         }
         else
         {
-            obstacle = ObstacleList.obstacles[Random.Range(0, ObstacleList.obstacles.Count)];
+            obstacle = ObstacleList.GetRandomObstacle();
         }
 
         if (obstacle == ObstacleList.duckObject) 
