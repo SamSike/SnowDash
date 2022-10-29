@@ -10,8 +10,8 @@ public class ObstacleList : MonoBehaviour
     public GameObject jumpObject;
     public GameObject doubleObject;
 
-    public static List<GameObject> obstacles;
-    public static List<GameObject> edgeObstacles;
+    public List<GameObject> obstacles;
+    public List<GameObject> edgeObstacles;
 
     // Start is called before the first frame update
     void Start()

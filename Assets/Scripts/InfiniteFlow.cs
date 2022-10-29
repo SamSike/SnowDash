@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InfiniteFlow : MonoBehaviour
 {
-    private GameObject tile;
-    private ObstacleList ObstacleList;
+    public GameObject tile;
+    public ObstacleList ObstacleList;
 
     private Vector3 nextTileSpawn;
     private Vector3 nextObstV;
@@ -83,6 +83,8 @@ public class InfiniteFlow : MonoBehaviour
                 if(newTheme != current){    
                     tile = ThemedTiles.tileList[newTheme];
                     ObstacleList = ThemedObstacleList.ThemedList[newTheme];
+
+                    Debug.Log("Changed theme to: ", tile);
                     break;
                 }
             }
