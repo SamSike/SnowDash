@@ -7,6 +7,7 @@ public class ThemedTiles : MonoBehaviour
     public GameObject snowTile;
     public GameObject lavaTile;
     public GameObject desertTile;
+    public GameObject forestTile;
 
     private List<GameObject> tileList;
 
@@ -17,6 +18,7 @@ public class ThemedTiles : MonoBehaviour
         tileList.Add(snowTile);
         tileList.Add(lavaTile);
         tileList.Add(desertTile);
+        tileList.Add(forestTile);
     }
 
     public GameObject GetTheme(int index){ return tileList[index]; }
