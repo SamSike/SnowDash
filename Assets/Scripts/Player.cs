@@ -5,6 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+
+    public ParticleSystem TrailingEffect;
+    private float defaultEmission = 15f;
+    private float movingEmission = 60f;
+    private float jumpingEmission = 0f;
+
     private bool isJump, isDuck, isMoveX, isGameOver = false;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
     private float speedMoveRatio = 5f;
@@ -209,18 +215,24 @@ public class Player : MonoBehaviour
     {
         // Player Animation when character ducks 
         SetCrouch(crouch);
+        var emission = TrailingEffect.emission;
+        emission.rateOverTime = defaultEmission;
     }
     private void JumpAnimation()
     {
         // Player Animation when character jumps
         // SetRotateY((float)(JumpStartTime - Now()) * 360 / defaultJumpTime);
-        DefaultAnimation();
+        SetCrouch(defaultScale);
+        var emission = TrailingEffect.emission;
+        emission.rateOverTime = jumpingEmission;
     }
     private void DefaultAnimation()
     {
         // Default Player Animation
         SetCrouch(defaultScale);
         SetRotateY(0);
+        var emission = TrailingEffect.emission;
+        emission.rateOverTime = defaultEmission;
     }
     private void CollideAnimation()
     {
@@ -231,11 +243,15 @@ public class Player : MonoBehaviour
     {
         // Player Animation when character moves left
         SetRotateY(rotateLeft);
+        var emission = TrailingEffect.emission;
+        emission.rateOverTime = movingEmission;
     }
     private void RightAnimation()
     {
         // Player Animation when character moves right
         SetRotateY(rotateRight);
+        var emission = TrailingEffect.emission;
+        emission.rateOverTime = movingEmission;
     }
 
     private void SetX(float value)

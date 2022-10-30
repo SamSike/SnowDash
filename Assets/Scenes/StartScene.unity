@@ -20910,6 +20910,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sled_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4390693671418892777, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485335693356792793, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485335693356792793, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485335693356792793, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7781005951000713872, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: m_RootOrder
       value: 0
