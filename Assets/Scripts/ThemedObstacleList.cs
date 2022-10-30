@@ -7,6 +7,7 @@ public class ThemedObstacleList : MonoBehaviour
     public ObstacleList ObstacleSnowList;
     public ObstacleList ObstacleLavaList;
     public ObstacleList ObstacleDesertList;
+    public ObstacleList ObstacleForestList;
 
     private List<ObstacleList> ThemedList;
 
@@ -17,6 +18,7 @@ public class ThemedObstacleList : MonoBehaviour
         ThemedList.Add(ObstacleSnowList);
         ThemedList.Add(ObstacleLavaList);
         ThemedList.Add(ObstacleDesertList);    
+        ThemedList.Add(ObstacleForestList);   
     }
 
     public ObstacleList GetTheme(int index){ return ThemedList[index]; }
