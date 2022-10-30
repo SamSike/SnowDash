@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    public float multiplier = 7f;
-    public float duration = 4f;
+    public float multiplier = 3f;
+    public float duration = 5f;
     public GameObject pickupEffect;
     public Player players;
-
-    bool teleporting = false;
     void OnTriggerEnter (Collider other){
         if(other.CompareTag("Player")){
             StartCoroutine(pickUp(other));
@@ -18,12 +16,16 @@ public class PowerUp : MonoBehaviour
 
     void teleport(Collider player){
         Debug.Log("Power Up is Teleport");
-        players.SetZspeed((players.GetZSpeed()) * multiplier);
+        Debug.Log(players.GetZSpeed());
+        float boostedspeed = players.GetZSpeed() * multiplier;
+        players.SetZspeed(boostedspeed);
+        Debug.Log(players.GetZSpeed());
     }
 
     IEnumerator pickUp(Collider player){
         var effect = Instantiate(pickupEffect, transform.position, transform.rotation);
-
+        bool teleporting = false;
+         Debug.Log(this.name);
         if(this.name == "Armor"){
             //Add Armor to Player.
             Debug.Log("Power Up is Armor");
@@ -46,7 +48,9 @@ public class PowerUp : MonoBehaviour
         }
         if(this.name == "TeleportForward"){
             //Add Speed Boost to Player.
-            teleport(player);
+            if(teleporting == false){
+                teleport(player);
+            }             
             teleporting = true; 
         }
 

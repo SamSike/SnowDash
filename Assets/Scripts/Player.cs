@@ -270,7 +270,7 @@ public class Player : MonoBehaviour
     {
         this.zSpeed = value;
     }
-    public float GetZSpeed(){ return zSpeed; }
+    public float GetZSpeed(){ return this.zSpeed; }
     public bool GetIsGameOver(){ return isGameOver; }
     public float GetLaneWidth(){ return laneWidth; }
 }
