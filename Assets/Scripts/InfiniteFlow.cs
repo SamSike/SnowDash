@@ -38,7 +38,7 @@ public class InfiniteFlow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nextTileSpawn.z = 80;
+        nextTileSpawn.z = 120;
         tile = ThemedTiles.snowTile;
         ObstacleList = ThemedObstacleList.ObstacleSnowList;
 
