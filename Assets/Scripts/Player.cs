@@ -265,6 +265,11 @@ public class Player : MonoBehaviour
     {
         this.transform.eulerAngles = new Vector3(this.transform.rotation.x, value, this.transform.rotation.z);
     }
+
+    public void SetZspeed(float value)
+    {
+        this.zSpeed = value;
+    }
     public float GetZSpeed(){ return zSpeed; }
     public bool GetIsGameOver(){ return isGameOver; }
     public float GetLaneWidth(){ return laneWidth; }
