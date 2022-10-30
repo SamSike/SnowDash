@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private float crouch = 0.3f;
     private float defaultScale;
 
+    private bool isinvincible = false;
 
     //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
     private void Start(){
@@ -40,7 +41,11 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         if(collision.GetComponent<Collider>().tag == "Finish"){
-            isGameOver = true;        
+            Debug.Log("I am in Game Over collider");
+            if(!isinvincible){
+                isGameOver = true;  
+            }
+                  
             Debug.Log(collision.GetComponent<Collider>().name);
             CollideAnimation();
         }
@@ -64,7 +69,7 @@ public class Player : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
             {
-            Duck();
+                Duck();
             }
         }
     }
@@ -274,6 +279,11 @@ public class Player : MonoBehaviour
     public void SetyMove(float value)
     {
         this.yMove = value;
+    }
+
+    public void Setinvincible(bool value)
+    {
+        this.isinvincible = value;
     }
 
     public float GetyMove(){ return this.yMove; }
