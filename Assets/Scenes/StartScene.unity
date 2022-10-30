@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.067819424, g: 0.273946, b: 0.4846446, a: 1}
+  m_IndirectSpecularColor: {r: 0.06781944, g: 0.27394506, b: 0.484644, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -681,7 +681,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &33709091
 PrefabInstance:
@@ -883,7 +883,7 @@ PrefabInstance:
       objectReference: {fileID: 9045837020752623995}
     - target: {fileID: 4001148136044945094, guid: c338127b1c945884d9e75aeb213e12b7, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4001148136044945094, guid: c338127b1c945884d9e75aeb213e12b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3198,6 +3198,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1451780947}
     m_Modifications:
+    - target: {fileID: 3165981875672966885, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8583646494621213305, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -9635,7 +9639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946407750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -95.9}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9674,7 +9678,7 @@ Transform:
   - {fileID: 33709092}
   - {fileID: 237273169}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &946517597
 PrefabInstance:
@@ -13300,7 +13304,7 @@ RectTransform:
   - {fileID: 938789343}
   - {fileID: 134536013}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14163,7 +14167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.8
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -14195,7 +14199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.7
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 199503414395959952, guid: 9e03786a9517b604d8e930182607a128, type: 3}
       propertyPath: m_Flip.x
@@ -14546,6 +14550,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1451780947}
     m_Modifications:
+    - target: {fileID: 3165981875672966885, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8583646494621213305, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -16788,7 +16796,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7769338473567859107, guid: 82e39766d550f9842af0be6596e899e6, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7769338473567859107, guid: 82e39766d550f9842af0be6596e899e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20033,7 +20041,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1861387489362748796, guid: 31aee6e8f110e59489b374de90f888bf, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1861387489362748796, guid: 31aee6e8f110e59489b374de90f888bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20397,6 +20405,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1451780947}
     m_Modifications:
+    - target: {fileID: 3165981875672966885, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8583646494621213305, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -21991,6 +22003,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1451780947}
     m_Modifications:
+    - target: {fileID: 3165981875672966885, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8583646494621213305, guid: 74a35b6cd3786ab48b4d27b4152f4ad8, type: 3}
       propertyPath: m_RootOrder
       value: 7
