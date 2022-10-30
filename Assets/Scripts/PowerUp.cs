@@ -29,10 +29,17 @@ public class PowerUp : MonoBehaviour
         players.SetyMove(2 * Jumpfactor);
     }
 
+    void invinsible(Collider player){
+        Debug.Log("Power Up is Invincible");
+        players.Setinvincible(true);
+    }
+
     IEnumerator pickUp(Collider player){
         var effect = Instantiate(pickupEffect, transform.position, transform.rotation);
         bool teleporting = false;
         bool jumpboost = false;
+        bool isinvinsible = false;
+
         Debug.Log(this.name);
         if(this.name == "Armor"){
             //Add Armor to Player.
@@ -40,7 +47,10 @@ public class PowerUp : MonoBehaviour
         }
         if(this.name == "Invincible"){
             //Add Invincibility to Player.
-            Debug.Log("Power Up is Invincible");
+            if(isinvinsible == false){
+                invinsible(player);
+            }
+            isinvinsible = true;
         }
         if(this.name == "JumpHigher"){
             //Add Jump Boost to Player.
@@ -80,6 +90,12 @@ public class PowerUp : MonoBehaviour
             players.SetyMove(players.GetyMove()/Jumpfactor);
             jumpboost = false;
         }
+
+        if(isinvinsible == true){
+            players.Setinvincible(false);
+            isinvinsible = false;
+        }
+        
         Destroy(effect);
         Destroy(gameObject);
     }
