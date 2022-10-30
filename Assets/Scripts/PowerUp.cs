@@ -7,7 +7,7 @@ public class PowerUp : MonoBehaviour
     public float multiplier = 4f;
 
     public float Jumpfactor = 2f;
-    public float duration = 5f;
+    public float duration = 8f;
     public GameObject pickupEffect;
     public Player players;
     void OnTriggerEnter (Collider other){
@@ -95,7 +95,7 @@ public class PowerUp : MonoBehaviour
             players.Setinvincible(false);
             isinvinsible = false;
         }
-        
+
         Destroy(effect);
         Destroy(gameObject);
     }
