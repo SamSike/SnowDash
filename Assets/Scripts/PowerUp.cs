@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    public float multiplier = 3f;
+    public float multiplier = 4f;
+
+    public float Jumpfactor = 2f;
     public float duration = 5f;
     public GameObject pickupEffect;
     public Player players;
@@ -22,10 +24,16 @@ public class PowerUp : MonoBehaviour
         Debug.Log(players.GetZSpeed());
     }
 
+    void jumpBoost(Collider player){
+        Debug.Log("Power Up is Jump Higher");
+        players.SetyMove(2 * Jumpfactor);
+    }
+
     IEnumerator pickUp(Collider player){
         var effect = Instantiate(pickupEffect, transform.position, transform.rotation);
         bool teleporting = false;
-         Debug.Log(this.name);
+        bool jumpboost = false;
+        Debug.Log(this.name);
         if(this.name == "Armor"){
             //Add Armor to Player.
             Debug.Log("Power Up is Armor");
@@ -36,7 +44,10 @@ public class PowerUp : MonoBehaviour
         }
         if(this.name == "JumpHigher"){
             //Add Jump Boost to Player.
-            Debug.Log("Power Up is Jump Higher");
+            if(jumpboost == false){
+                jumpBoost(player);
+            }
+            jumpboost = true;
         }
         if(this.name == "PointsMultiplier"){
             //Add Points Multiplier to Player.
@@ -65,6 +76,10 @@ public class PowerUp : MonoBehaviour
             teleporting = false;
         }
 
+        if(jumpboost == true){
+            players.SetyMove(players.GetyMove()/Jumpfactor);
+            jumpboost = false;
+        }
         Destroy(effect);
         Destroy(gameObject);
     }
