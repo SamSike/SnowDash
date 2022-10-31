@@ -13944,7 +13944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Armor: {fileID: 4289739246397773195, guid: 721334434a4922c4ea8a76178fc8c9ce, type: 3}
   Invincible: {fileID: 4001148136044794068, guid: c338127b1c945884d9e75aeb213e12b7, type: 3}
-  JumpHigher: {fileID: 1861387489362897774, guid: 31aee6e8f110e59489b374de90f888bf, type: 3}
+  JumpHigher: {fileID: 9156135126185664098, guid: 69b30a85865ccda458a6aec453414e03, type: 3}
   PointsMultiplier: {fileID: 2381864675367061331, guid: 6cb4dc3cefff7b9428adc03c95e4c99a, type: 3}
   SlowTime: {fileID: 1056575538308912830, guid: 2e1afaca6ffe46b4bb5d95006065b91e, type: 3}
   TeleportForward: {fileID: 7769338473570101230, guid: 82e39766d550f9842af0be6596e899e6, type: 3}
