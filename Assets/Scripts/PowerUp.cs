@@ -10,7 +10,7 @@ public class PowerUp : MonoBehaviour
     public float duration = 8f;
     public float Invincibility_duration = 15f;
     public GameObject pickupEffect;
-    public Player players;
+    public Player Sled_1;
     void OnTriggerEnter (Collider other){
         if(other.CompareTag("Player")){
             StartCoroutine(pickUp(other));
@@ -19,25 +19,25 @@ public class PowerUp : MonoBehaviour
 
     void teleport(Collider player){
         Debug.Log("Power Up is Teleport");
-        Debug.Log(players.GetZSpeed());
-        float boostedspeed = players.GetZSpeed() * multiplier;
-        players.SetZspeed(boostedspeed);
-        Debug.Log(players.GetZSpeed());
+        Debug.Log(Sled_1.GetZSpeed());
+        float boostedspeed = Sled_1.GetZSpeed() * multiplier;
+        Sled_1.SetZspeed(boostedspeed);
+        Debug.Log(Sled_1.GetZSpeed());
     }
 
     void jumpBoost(Collider player){
         Debug.Log("Power Up is Jump Higher");
-        players.SetyMove(2 * Jumpfactor);
+        Sled_1.SetyMove(2 * Jumpfactor);
     }
 
     void invinsible(Collider player){
         Debug.Log("Power Up is Invincible");
-        players.Setinvincible(true);
+        Sled_1.Setinvincible(true);
     }
 
     void buildarmor(Collider player){
         Debug.Log("Power Up is Armor");
-        players.Setarmorcount((players.GetArmorCount()) + 2);
+        Sled_1.Setarmorcount((Sled_1.GetArmorCount()) + 2);
     }
 
     IEnumerator pickUp(Collider player){
@@ -51,7 +51,7 @@ public class PowerUp : MonoBehaviour
         if(this.name == "Armor"){
             //Add Armor to Player.
             buildarmor(player);
-            Debug.Log(players.GetArmorCount());           
+            Debug.Log(Sled_1.GetArmorCount());           
             armorcount += 1;
 
             GetComponent<MeshRenderer>().enabled = false;
@@ -70,7 +70,7 @@ public class PowerUp : MonoBehaviour
             yield return new WaitForSeconds(Invincibility_duration);
 
             if(isinvinsible == true){
-                players.Setinvincible(false);
+                Sled_1.Setinvincible(false);
                 isinvinsible = false;
             }
         }
@@ -87,7 +87,7 @@ public class PowerUp : MonoBehaviour
             yield return new WaitForSeconds(duration);
 
             if(jumpboost == true){
-                players.SetyMove(players.GetyMove()/Jumpfactor);
+                Sled_1.SetyMove(Sled_1.GetyMove()/Jumpfactor);
                 jumpboost = false;
             }
         }
@@ -114,7 +114,7 @@ public class PowerUp : MonoBehaviour
             yield return new WaitForSeconds(duration);
 
             if(teleporting == true){
-                players.SetZspeed((players.GetZSpeed()) / multiplier);
+                Sled_1.SetZspeed((Sled_1.GetZSpeed()) / multiplier);
                 teleporting = false;
                 
             }
