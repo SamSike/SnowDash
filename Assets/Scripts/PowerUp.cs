@@ -20,8 +20,16 @@ public class PowerUp : MonoBehaviour
     void teleport(Collider player){
         Debug.Log("Power Up is Teleport");
         Debug.Log(Sled_1.GetZSpeed());
-        float boostedspeed = Sled_1.GetZSpeed() * multiplier;
+        float boostedspeed = Sled_1.GetZSpeed()*multiplier;
         Sled_1.SetZspeed(boostedspeed);
+        Debug.Log(Sled_1.GetZSpeed());
+    }
+
+    void slowSpeed(Collider player){
+        Debug.Log("Power Up is Slow Time");
+        Debug.Log(Sled_1.GetZSpeed());
+        float slowedspeed = Sled_1.GetZSpeed()/multiplier;
+        Sled_1.SetZspeed(slowedspeed);
         Debug.Log(Sled_1.GetZSpeed());
     }
 
@@ -37,7 +45,7 @@ public class PowerUp : MonoBehaviour
 
     void buildarmor(Collider player){
         Debug.Log("Power Up is Armor");
-        Sled_1.Setarmorcount((Sled_1.GetArmorCount()) + 2);
+        Sled_1.Setarmorcount((Sled_1.GetArmorCount())+2);
     }
 
     IEnumerator pickUp(Collider player){
@@ -45,6 +53,7 @@ public class PowerUp : MonoBehaviour
         bool teleporting = false;
         bool jumpboost = false;
         bool isinvinsible = false;
+        bool slowing = false;
         int armorcount = 0;
 
         Debug.Log(this.name);
@@ -95,11 +104,28 @@ public class PowerUp : MonoBehaviour
         if(this.name == "PointsMultiplier"){
             //Add Points Multiplier to Player.
             Debug.Log("Power Up is Multiply Points");
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+
+            yield return new WaitForSeconds(duration);
         }
 
         if(this.name == "SlowTime"){
             //Slow Time to Player.
-            Debug.Log("Power Up is Slow Time");
+            if(slowing == false){
+                slowSpeed(player);
+            }             
+            slowing = true; 
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+
+            yield return new WaitForSeconds(duration);
+
+            if(slowing == true){
+                Sled_1.SetZspeed((Sled_1.GetZSpeed())*multiplier);
+                slowing = false;
+                
+            }
         }
 
         if(this.name == "TeleportForward"){
@@ -114,7 +140,7 @@ public class PowerUp : MonoBehaviour
             yield return new WaitForSeconds(duration);
 
             if(teleporting == true){
-                Sled_1.SetZspeed((Sled_1.GetZSpeed()) / multiplier);
+                Sled_1.SetZspeed((Sled_1.GetZSpeed())/multiplier);
                 teleporting = false;
                 
             }
