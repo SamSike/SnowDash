@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class TextOnScreen : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class TextOnScreen : MonoBehaviour
     public Text tutorialText;
     public Text gameOver;
     public Text gameOverScore;
+    public Button Back;
     
     string teleporting = "inactive";
     string jumpboost = "inactive";
@@ -80,6 +82,11 @@ public class TextOnScreen : MonoBehaviour
         scoreText.text = "";
         highScoretext.text = "";
         tutorialText.text = "";
+    }
+
+    public void Play (){
+        if (player.GetIsGameOver())
+            SceneManager.LoadScene("Menu");
     }
 
     public void SetAddOn(float value){
