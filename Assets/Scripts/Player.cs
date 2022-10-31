@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private float defaultScale;
 
     private bool isinvincible = false;
+    private int armorcount = 0;
 
     //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
     private void Start(){
@@ -48,8 +49,12 @@ public class Player : MonoBehaviour
     {
         if(collision.GetComponent<Collider>().tag == "Finish"){
             Debug.Log("I am in Game Over collider");
-            if(!isinvincible){
+            if(!isinvincible && armorcount == 0){
                 isGameOver = true;  
+            }
+            if(armorcount > 0 && collision.CompareTag("Finish")){
+                armorcount -= 1;
+                Debug.Log(armorcount);
             }
                   
             Debug.Log(collision.GetComponent<Collider>().name);
@@ -302,6 +307,12 @@ public class Player : MonoBehaviour
         this.isinvincible = value;
     }
 
+    public void Setarmorcount(int value)
+    {
+        this.armorcount = value;
+    }
+
+    public int GetArmorCount(){ return this.armorcount; }
     public float GetyMove(){ return this.yMove; }
     public float GetZSpeed(){ return this.zSpeed; }
     public bool GetIsGameOver(){ return isGameOver; }
