@@ -165,23 +165,44 @@ public class InfiniteFlow : MonoBehaviour
 
     private void DestroyIrrelevant()
     {
-        if (tilesInGame.Count > 0 && tilesInGame[0].transform.position.z + tileSize < player.transform.position.z - offset)
+        try
         {
-            Destroy(tilesInGame[0]);
-            tilesInGame.RemoveAt(0);
-        }
-        if (obstaclesInGame.Count > 0 && obstaclesInGame[0].transform.position.z < player.transform.position.z - offset)
-        {
-            Destroy(obstaclesInGame[0]);
-            obstaclesInGame.RemoveAt(0);
-        }
-        if(powerupsInGame.Count > 0){
-            if(!powerupsInGame[0])
-                powerupsInGame.RemoveAt(0);
-            else if(powerupsInGame[0].transform.position.z < player.transform.position.z - offset){
-                Destroy(powerupsInGame[0]);
-                powerupsInGame.RemoveAt(0);
+            foreach (GameObject t in tilesInGame)
+            {
+                if (t.transform.position.z + tileSize < player.transform.position.z - offset)
+                {
+                    Destroy(t);
+                    Debug.Log("destroyed tile");
+                }
+            }
+            tilesInGame.RemoveAll(t => t.transform.position.z + tileSize < player.transform.position.z - offset);
+            // if (tilesInGame[0].transform.position.z + tileSize < player.transform.position.z - offset)
+            // {
+            //     Destroy(tilesInGame[0]);
+            //     tilesInGame.RemoveAt(0);
+            // }
+            foreach (GameObject obstacle in obstaclesInGame)
+            {
+                if (obstacle.transform.position.z < player.transform.position.z - offset)
+                {
+                    Destroy(obstacle);
+                }
+            }
+            obstaclesInGame.RemoveAll(t => t.transform.position.z < player.transform.position.z - offset);
+            if(powerupsInGame.Count > 0) 
+            {
+                if (!powerupsInGame[0]) 
+                {
+                    powerupsInGame.RemoveAt(0);
+                }
+                else if(powerupsInGame[0].transform.position.z < player.transform.position.z - offset)
+                {
+                    Destroy(powerupsInGame[0]);
+                    powerupsInGame.RemoveAt(0);
+                }
             }
         }
+       
+       
     }
 }
