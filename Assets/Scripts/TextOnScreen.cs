@@ -11,6 +11,7 @@ public class TextOnScreen : MonoBehaviour
     public Text gameOver;
     public Text gameOverScore;
 
+    public Text armorcountText;
     private float addOnScore = 0;
     private float fadeWaitTime = 1f;
     private float gameOverdelay = 1f;
@@ -23,6 +24,7 @@ public class TextOnScreen : MonoBehaviour
     void Update()
     {
         scoreText.text = "SCORE: "+ (addOnScore + player.transform.position.z).ToString("0");
+        armorcountText.text = (player.GetArmorCount() / 2).ToString("0");
     }
 
     IEnumerator Tutorial(){
