@@ -28,8 +28,10 @@ public class TrailEffect : MonoBehaviour
         ThemedEffects.Add(lavaEffect);
         ThemedEffects.Add(desertEffect);
         ThemedEffects.Add(forestEffect);
-
-        currentEffect = new ParticleSystem();
+        foreach (ParticleSystem t in ThemedEffects)
+        {
+            t.Stop();
+        }
     }
 
     void Update()
@@ -60,10 +62,6 @@ public class TrailEffect : MonoBehaviour
 
     public ParticleSystem SetNewEffect(ParticleSystem effect)
     {
-        foreach (ParticleSystem t in ThemedEffects)
-        {
-            t.Stop();
-        }
         currentEffect = effect;
         currentEffect.Play();
         return currentEffect;
@@ -71,7 +69,9 @@ public class TrailEffect : MonoBehaviour
 
     public void SetTrailEmission(float newEmission)
     {
-        ParticleSystem.EmissionModule currentEmission = currentEffect.emission;
-        currentEmission.rateOverTime = newEmission;
+        if(currentEffect){
+            ParticleSystem.EmissionModule currentEmission = currentEffect.emission;
+            currentEmission.rateOverTime = newEmission;
+        }
     }
 }
