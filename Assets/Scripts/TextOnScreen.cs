@@ -85,8 +85,7 @@ public class TextOnScreen : MonoBehaviour
     }
 
     public void Play (){
-        if (player.GetIsGameOver())
-            SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("StartScene");
     }
 
     public void SetAddOn(float value){
