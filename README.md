@@ -114,7 +114,7 @@ Additionally shaders were considered for certain effects such as the fire or dus
 
 #### Particle System
 
-File Path: Assets/Prefabs/snowprefab/Snow Fall
+File Path: /Assets/Prefabs/snowprefab/Snow Fall
 Attribute changed
 
 1. Start Size - Random between 0.025 and 0.05 since Snow doesn’t always start at the same size.
@@ -129,3 +129,28 @@ Attribute changed
 5. Fade (Render) - The Fade rendering mode is also used to represent when the snow melts.
 
 ### Evaluation
+
+1. Methods
+   For the way to evaluate the game we chose two methods, one of them querying and the other one observational. For the querying methods there was a survey in google forms. We asked people to play the game and then gave them the survey so they could answer. The questions were basic ones regarding demographic like age and gender, as well as them rating the game and their enjoyment. For the observational method we chose the Post-task walkthrough as we believe it gave a more realistic experience to the user and we could know more about their thoughts on the game.
+
+2. Participants
+   a. Survey
+   6 participants - 4 men (66.7%) and 2 women (33.3%)
+   Most are in their early twenties (with the range being youngest 19 and oldest 26)
+
+   b.Post-task walkthrough
+   5 Participants - 3 women and 2 men
+   All in their early twenties
+   Most of them (⅘) said they play videogames constantly (At least twice weekly)
+
+3. Feedback
+   Overall in the survey there were mostly positive responses; the average rating of the game was 3.33 out of 5. Most said they liked the game, that it was easy to play and 66.7% said they would play the game.
+   For the walkthroughs we had more in depth feedback. All said the game was pretty intuitive and one mentioned they liked the lack of mouse use. They did mention the speed with the rain and/or smoke made the game more challenging especially in regard to the branch obstacle which was difficult to perceive sometimes.
+
+4. Changes made
+   Because of the short period of time there was no opportunity to create improvement iterations from the feedback we received. So we believe that would create a good opportunity for future work and also have a wider pool of feedback.
+
+### References + Resources
+
+https://www.youtube.com/watch?v=Q4rtR8iNFbY
+https://www.youtube.com/watch?v=K4uOjb5p3Io
