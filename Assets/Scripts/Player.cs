@@ -6,10 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public ParticleSystem TrailingEffect;
+    public TrailEffect TrailingEffect;
     private float defaultEmission = 15f;
     private float movingEmission = 60f;
-    private float jumpingEmission = 0f;
+    private float zeroEmission = 0f;
 
     private bool isJump, isDuck, isMoveX, isGameOver = false;
     private double JumpStartTime, DuckStartTime, MoveXStartTime;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private float duckSpeed;
     private float zSpeed = 10f;
     private float zAcceleration = 0.2f;
-    
+
     //The re-sizing of the y scale to give the effect of dunk
     private float crouch = 0.3f;
     private float defaultScale;
@@ -36,27 +36,32 @@ public class Player : MonoBehaviour
     private int armorcount = 0;
 
     //Asi empieza y de aqui checo la posicion cuano tengo que codear de verdad lo que quiero que haga para despuer llamarlo con teclas
-    private void Start(){
-        isJump = isDuck = isMoveX  = false;
+    private void Start()
+    {
+        isJump = isDuck = isMoveX = false;
         defaultScale = this.transform.localScale.y;
         duckSpeed = -yMove * Time.fixedDeltaTime * 2f;
         xMove = laneWidth;
         rotateRight = -rotateLeft;
+        DefaultAnimation();
     }
-    
+
     //Taken from Unitys page
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.GetComponent<Collider>().tag == "Finish"){
+        if (collision.GetComponent<Collider>().tag == "Finish")
+        {
             Debug.Log("I am in Game Over collider");
-            if(!isinvincible && armorcount == 0){
-                isGameOver = true;  
+            if (!isinvincible && armorcount == 0)
+            {
+                isGameOver = true;
             }
-            if(armorcount > 0 && collision.CompareTag("Finish")){
+            if (armorcount > 0 && collision.CompareTag("Finish"))
+            {
                 armorcount -= 1;
                 Debug.Log(armorcount);
             }
-                  
+
             Debug.Log(collision.GetComponent<Collider>().name);
             CollideAnimation();
         }
@@ -65,7 +70,8 @@ public class Player : MonoBehaviour
     //Notas pa que le entieda: Pico la tecla y llama a la funcion principal
     private void Update()
     {
-        if(!isGameOver){
+        if (!isGameOver)
+        {
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
                 MoveRight();
@@ -87,7 +93,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isGameOver){
+        if (!isGameOver)
+        {
             if (isMoveX)
             {
                 IncrementX(xMoveInSteps);
@@ -113,26 +120,29 @@ public class Player : MonoBehaviour
                     SetY(0);
                 }
             }
-            
+
             else if (isDuck)
-            {            
-                if(this.transform.position.y <= 0){
+            {
+                if (this.transform.position.y <= 0)
+                {
                     SetY(0);
                     DuckAnimation();
                 }
-                else{
+                else
+                {
                     DuckStartTime = Now();
                     IncrementY(duckSpeed);
                 }
 
-                if(Now() - DuckStartTime >= defaultJumpTime){
+                if (Now() - DuckStartTime >= defaultJumpTime)
+                {
                     isDuck = false;
                     DefaultAnimation();
                 }
             }
 
-            walkZ();     
-        }   
+            walkZ();
+        }
     }
 
     //Aquí pongo lo que hace la función de verdad. Primero checo que no esté ya en la pision en la que quiero que esté
@@ -178,8 +188,8 @@ public class Player : MonoBehaviour
             SetCrouch(0);
         }
         if (isDuck)
-            isDuck = false;                
-    
+            isDuck = false;
+
     }
     private void Duck()
     {
@@ -189,17 +199,18 @@ public class Player : MonoBehaviour
         {
             isDuck = true;
             DuckStartTime = Now();
-        }  
+        }
 
-        if(isJump){
+        if (isJump)
+        {
             isJump = false;
-            if(!isMoveX)
+            if (!isMoveX)
                 DefaultAnimation();
         }
-        
+
     }
 
-    private double Now(){ return Time.realtimeSinceStartupAsDouble; }
+    private double Now() { return Time.realtimeSinceStartupAsDouble; }
     private void walkZ()
     {
         IncrementZ(zSpeed * Time.fixedDeltaTime);
@@ -220,43 +231,39 @@ public class Player : MonoBehaviour
     {
         // Player Animation when character ducks 
         SetCrouch(crouch);
-        var emission = TrailingEffect.emission;
-        emission.rateOverTime = defaultEmission;
+        TrailingEffect.SetTrailEmission(movingEmission);
     }
     private void JumpAnimation()
     {
         // Player Animation when character jumps
         // SetRotateY((float)(JumpStartTime - Now()) * 360 / defaultJumpTime);
         SetCrouch(defaultScale);
-        var emission = TrailingEffect.emission;
-        emission.rateOverTime = jumpingEmission;
+        TrailingEffect.SetTrailEmission(zeroEmission);
     }
     private void DefaultAnimation()
     {
         // Default Player Animation
         SetCrouch(defaultScale);
         SetRotateY(0);
-        var emission = TrailingEffect.emission;
-        emission.rateOverTime = defaultEmission;
+        TrailingEffect.SetTrailEmission(defaultEmission);
     }
     private void CollideAnimation()
     {
         // Player Animation when character collides with obstacle
         //DefaultAnimation();
+        TrailingEffect.SetTrailEmission(zeroEmission);
     }
     private void LeftAnimation()
     {
         // Player Animation when character moves left
         SetRotateY(rotateLeft);
-        var emission = TrailingEffect.emission;
-        emission.rateOverTime = movingEmission;
+        TrailingEffect.SetTrailEmission(movingEmission);
     }
     private void RightAnimation()
     {
         // Player Animation when character moves right
         SetRotateY(rotateRight);
-        var emission = TrailingEffect.emission;
-        emission.rateOverTime = movingEmission;
+        TrailingEffect.SetTrailEmission(movingEmission);
     }
 
     private void SetX(float value)
@@ -273,7 +280,7 @@ public class Player : MonoBehaviour
     }
     private void SetCrouch(float value)
     {
-        this.transform.localScale = new Vector3 (this.transform.localScale.x, value, this.transform.localScale.z);
+        this.transform.localScale = new Vector3(this.transform.localScale.x, value, this.transform.localScale.z);
     }
     private void IncrementX(float value)
     {
@@ -312,9 +319,9 @@ public class Player : MonoBehaviour
         this.armorcount = value;
     }
 
-    public int GetArmorCount(){ return this.armorcount; }
-    public float GetyMove(){ return this.yMove; }
-    public float GetZSpeed(){ return this.zSpeed; }
-    public bool GetIsGameOver(){ return isGameOver; }
-    public float GetLaneWidth(){ return laneWidth; }
+    public int GetArmorCount() { return this.armorcount; }
+    public float GetyMove() { return this.yMove; }
+    public float GetZSpeed() { return this.zSpeed; }
+    public bool GetIsGameOver() { return isGameOver; }
+    public float GetLaneWidth() { return laneWidth; }
 }
