@@ -67,7 +67,7 @@ public class PowerUp : MonoBehaviour
 
 
         Debug.Log(this.name);
-        if(this.name == "Armor"){
+        if(this.name == "Armor" || this.name == "Armor(Clone)"){
             //Add Armor to Player.
             buildarmor(player);
             Debug.Log(Sled_1.GetArmorCount());           
@@ -77,7 +77,7 @@ public class PowerUp : MonoBehaviour
             GetComponent<Collider>().enabled = false;
         }
 
-        if(this.name == "Invincible"){
+        if(this.name == "Invincible" || this.name == "Invincible(Clone)"){
             //Add Invincibility to Player.
             if(isinvinsible == false){
                 invinsible(player);
@@ -96,7 +96,7 @@ public class PowerUp : MonoBehaviour
             }
         }
 
-        if(this.name == "JumpHigher"){
+        if(this.name == "JumpHigher" || this.name == "JumpHigher(Clone)"){
             //Add Jump Boost to Player.
             if(jumpboost == false){
                 jumpBoost(player);
@@ -115,7 +115,7 @@ public class PowerUp : MonoBehaviour
             }
         }
 
-        if(this.name == "PointsMultiplier"){
+        if(this.name == "PointsMultiplier" || this.name == "PointsMultiplier(Clone)"){
             //Add Points Multiplier to Player.
             MultiplyPoints(player);
             GetComponent<MeshRenderer>().enabled = false;
@@ -144,7 +144,7 @@ public class PowerUp : MonoBehaviour
             }
         }
 
-        if(this.name == "TeleportForward"){
+        if(this.name == "TeleportForward" || this.name == "TeleportForward(Clone)"){
             //Add Speed Boost to Player.
             if(teleporting == false){
                 teleport(player);
