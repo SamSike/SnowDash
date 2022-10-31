@@ -25,14 +25,22 @@ public class TextOnScreen : MonoBehaviour
     private float fadeWaitTime = 1f;
     private float gameOverdelay = 1f;
 
+    private float currentHigh;
+
     void Start(){
         StartCoroutine(Tutorial());
         StartCoroutine(GameOver());
+        highScoretext.text = "HIGH SCORE: "+ PlayerPrefs.GetFloat("currentHigh", 0).ToString("0");
     }
 
     void Update()
     {
         scoreText.text = "SCORE: "+ (addOnScore + player.transform.position.z).ToString("0");
+        if((addOnScore + player.transform.position.z) > PlayerPrefs.GetFloat("currentHigh", 0)){
+            PlayerPrefs.SetFloat("currentHigh", (addOnScore + player.transform.position.z));
+            highScoretext.text = "HIGH SCORE: "+ (addOnScore + player.transform.position.z).ToString("0");
+        }
+        
         armorcountText.text = (player.GetArmorCount() / 2).ToString("0");
         JumpHighText.text = jumpboost;
         InvisibleText.text = isinvinsible;
@@ -69,7 +77,6 @@ public class TextOnScreen : MonoBehaviour
             yield return new WaitForSeconds(gameOverdelay);
         gameOver.text = "GAME OVER";
         gameOverScore.text = scoreText.text;
-
         scoreText.text = "";
         highScoretext.text = "";
         tutorialText.text = "";
