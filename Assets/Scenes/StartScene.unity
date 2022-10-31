@@ -1035,6 +1035,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &429911874 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2076881423050965199, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+  m_PrefabInstance: {fileID: 1617614117723481066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &432614653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1831,6 +1836,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cb4dc3cefff7b9428adc03c95e4c99a, type: 3}
+--- !u!198 &935312998 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6425962964958726636, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+  m_PrefabInstance: {fileID: 1617614117723481066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &938789342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,6 +1930,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3584818687860281037, guid: acd342b1a10187b41ba9caa0bf250088, type: 3}
   m_PrefabInstance: {fileID: 3584818686926587786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &971444763 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5787349486396887803, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+  m_PrefabInstance: {fileID: 1617614117723481066}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1003699264
 PrefabInstance:
@@ -2270,6 +2285,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4289739246397365145, guid: 721334434a4922c4ea8a76178fc8c9ce, type: 3}
   m_PrefabInstance: {fileID: 432614653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1315192935 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 681448769236765694, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+  m_PrefabInstance: {fileID: 1617614117723481066}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1326225973
 PrefabInstance:
@@ -3258,9 +3278,17 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 681448769236765694, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1775745057103597377, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: m_Name
       value: Sled_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076881423050965199, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3485989522175723937, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3281,6 +3309,30 @@ PrefabInstance:
     - target: {fileID: 4485335693356792793, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856099269068299546, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: lavaEffect
+      value: 
+      objectReference: {fileID: 971444763}
+    - target: {fileID: 4856099269068299546, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: snowEffect
+      value: 
+      objectReference: {fileID: 935312998}
+    - target: {fileID: 4856099269068299546, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: desertEffect
+      value: 
+      objectReference: {fileID: 429911874}
+    - target: {fileID: 4856099269068299546, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: forestEffect
+      value: 
+      objectReference: {fileID: 1315192935}
+    - target: {fileID: 5787349486396887803, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962964958726636, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7781005951000713872, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: m_RootOrder
