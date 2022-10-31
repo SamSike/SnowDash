@@ -3583,6 +3583,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: desertTile
       objectReference: {fileID: 0}
+    - target: {fileID: 5334518360566870606, guid: a49f9ad502d8ff545a8825af276af702, type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334518360566870606, guid: a49f9ad502d8ff545a8825af276af702, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334518360566870606, guid: a49f9ad502d8ff545a8825af276af702, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 1.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a49f9ad502d8ff545a8825af276af702, type: 3}
