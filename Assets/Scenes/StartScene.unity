@@ -1149,7 +1149,7 @@ MonoBehaviour:
   bigObject: {fileID: 8124571273247579177, guid: cb2174d77e42ed74d8794609d80e4bbf, type: 3}
   duckObject: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
   jumpObject: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
-  doubleObject: {fileID: 9178047604103340251, guid: 0f407013ac6a8bc428a76e55593acf91, type: 3}
+  doubleObject: {fileID: 8517390036118458595, guid: fd871f897676cfd4eaf304171ee0d22b, type: 3}
 --- !u!1 &489082752 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4001148136044794068, guid: c338127b1c945884d9e75aeb213e12b7, type: 3}

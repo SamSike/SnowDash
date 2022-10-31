@@ -28,7 +28,7 @@ public class TrailEffect : MonoBehaviour
         ThemedEffects.Add(desertEffect);
         ThemedEffects.Add(forestEffect);
 
-        currentEffect = snowEffect;
+        currentEffect = new ParticleSystem();
     }
 
     void Update()

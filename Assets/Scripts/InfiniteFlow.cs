@@ -175,10 +175,13 @@ public class InfiniteFlow : MonoBehaviour
             Destroy(obstaclesInGame[0]);
             obstaclesInGame.RemoveAt(0);
         }
-        if (powerupsInGame.Count > 0 && powerupsInGame[0].transform.position.z < player.transform.position.z - offset)
-        {
-            Destroy(powerupsInGame[0]);
-            powerupsInGame.RemoveAt(0);
+        if(powerupsInGame.Count > 0){
+            if(!powerupsInGame[0])
+                powerupsInGame.RemoveAt(0);
+            if(powerupsInGame[0].transform.position.z < player.transform.position.z - offset){
+                Destroy(powerupsInGame[0]);
+                powerupsInGame.RemoveAt(0);
+            }
         }
     }
 }
