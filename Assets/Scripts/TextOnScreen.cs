@@ -7,9 +7,18 @@ public class TextOnScreen : MonoBehaviour
     public Player player;
     public Text scoreText;
     public Text highScoretext;
+    public Text JumpHighText;
+    public Text InvisibleText;
+    public Text SpeedSlowText;
+    public Text SpeedBoostText;
     public Text tutorialText;
     public Text gameOver;
     public Text gameOverScore;
+    
+    string teleporting = "inactive";
+    string jumpboost = "inactive";
+    string isinvinsible = "inactive";
+    string slowing = "inactive";
 
     public Text armorcountText;
     private float addOnScore = 0;
@@ -25,6 +34,10 @@ public class TextOnScreen : MonoBehaviour
     {
         scoreText.text = "SCORE: "+ (addOnScore + player.transform.position.z).ToString("0");
         armorcountText.text = (player.GetArmorCount() / 2).ToString("0");
+        JumpHighText.text = jumpboost;
+        InvisibleText.text = isinvinsible;
+        SpeedSlowText.text = slowing;
+        SpeedBoostText.text = teleporting;
     }
 
     IEnumerator Tutorial(){
@@ -68,5 +81,18 @@ public class TextOnScreen : MonoBehaviour
 
     public float getAddOn(){
         return this.addOnScore;
+    }
+
+    public void SetjumpBoost(string value){
+        this.jumpboost = value;
+    }
+    public void Setinvincible(string value){
+        this.isinvinsible = value;
+    }
+    public void SetspeedSlow(string value){
+        this.slowing = value;
+    }
+    public void SetSpeedBoost(string value){
+        this.teleporting = value;
     }
 }

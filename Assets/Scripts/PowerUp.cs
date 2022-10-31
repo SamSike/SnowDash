@@ -83,6 +83,7 @@ public class PowerUp : MonoBehaviour
                 invinsible(player);
             }
             isinvinsible = true;
+            pointText.Setinvincible("active");
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -90,6 +91,7 @@ public class PowerUp : MonoBehaviour
 
             if(isinvinsible == true){
                 Sled_1.Setinvincible(false);
+                pointText.Setinvincible("inactive");
                 isinvinsible = false;
             }
         }
@@ -100,6 +102,7 @@ public class PowerUp : MonoBehaviour
                 jumpBoost(player);
             }
             jumpboost = true;
+            pointText.SetjumpBoost("active");
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -107,7 +110,8 @@ public class PowerUp : MonoBehaviour
 
             if(jumpboost == true){
                 Sled_1.SetyMove(Sled_1.GetyMove()/Jumpfactor);
-                jumpboost = false;
+                pointText.SetjumpBoost("inactive");
+                jumpboost = false;                
             }
         }
 
@@ -126,6 +130,7 @@ public class PowerUp : MonoBehaviour
                 slowSpeed(player);
             }             
             slowing = true; 
+            pointText.SetspeedSlow("active");
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -133,6 +138,7 @@ public class PowerUp : MonoBehaviour
 
             if(slowing == true){
                 Sled_1.SetZspeed((Sled_1.GetZSpeed())*multiplier);
+                pointText.SetspeedSlow("inactive");
                 slowing = false;
                 
             }
@@ -144,7 +150,7 @@ public class PowerUp : MonoBehaviour
                 teleport(player);
             }             
             teleporting = true; 
-
+            pointText.SetSpeedBoost("active");
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -152,6 +158,7 @@ public class PowerUp : MonoBehaviour
 
             if(teleporting == true){
                 Sled_1.SetZspeed((Sled_1.GetZSpeed())/multiplier);
+                pointText.SetSpeedBoost("inactive");
                 teleporting = false;               
             }
         }

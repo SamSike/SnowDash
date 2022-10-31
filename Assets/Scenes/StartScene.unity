@@ -4933,7 +4933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4289739246397365145, guid: 721334434a4922c4ea8a76178fc8c9ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4289739246397365145, guid: 721334434a4922c4ea8a76178fc8c9ce, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14486,6 +14486,10 @@ MonoBehaviour:
   player: {fileID: 9045837020752623995}
   scoreText: {fileID: 1739338330}
   highScoretext: {fileID: 11840118}
+  JumpHighText: {fileID: 141568264}
+  InvisibleText: {fileID: 160522204}
+  SpeedSlowText: {fileID: 1021217088}
+  SpeedBoostText: {fileID: 1011864911}
   tutorialText: {fileID: 1648600837}
   gameOver: {fileID: 938789344}
   gameOverScore: {fileID: 134536014}
