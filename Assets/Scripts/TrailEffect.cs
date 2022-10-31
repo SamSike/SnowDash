@@ -20,7 +20,9 @@ public class TrailEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        newEffect = new List<ParticleSystem>();
+        newEffectStart = new List<float>();
+        ThemedEffects = new List<ParticleSystem>();
         ThemedEffects.Add(snowEffect);
         ThemedEffects.Add(lavaEffect);
         ThemedEffects.Add(desertEffect);
@@ -35,11 +37,8 @@ public class TrailEffect : MonoBehaviour
     {
         if (newEffectStart.Count > 0 && player.transform.position.z >= newEffectStart[0])
         {
-            {
+            if(currentEffect)
                 currentEffect.Stop();
-                //ParticleSystem.EmissionModule currentEmission = currentEffect.emission;
-                //currentEmission.rateOverTime = 0f;
-            }
             currentEffect = newEffect[0];
             currentEffect.Play();
             newEffect.RemoveAt(0);
@@ -67,6 +66,7 @@ public class TrailEffect : MonoBehaviour
     public void SetTrailEmission(float newEmission)
     {
         if(currentEffect){
+            currentEffect.Play();
             ParticleSystem.EmissionModule currentEmission = currentEffect.emission;
             currentEmission.rateOverTime = newEmission;
         }
