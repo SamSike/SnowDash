@@ -37,12 +37,12 @@ public class TrailEffect : MonoBehaviour
         if (newEffectStart.Count > 0 && player.transform.position.z >= newEffectStart[0])
         {
             {
-                currentEffect.Stop(true);
+                currentEffect.Stop();
                 //ParticleSystem.EmissionModule currentEmission = currentEffect.emission;
                 //currentEmission.rateOverTime = 0f;
             }
             currentEffect = newEffect[0];
-            currentEffect.Play(true);
+            currentEffect.Play();
             newEffect.RemoveAt(0);
             newEffectStart.RemoveAt(0);
         }
@@ -62,10 +62,10 @@ public class TrailEffect : MonoBehaviour
     {
         foreach (ParticleSystem t in ThemedEffects)
         {
-            t.Stop(true);
+            t.Stop();
         }
         currentEffect = effect;
-        currentEffect.Play(true);
+        currentEffect.Play();
         return currentEffect;
     }
 
