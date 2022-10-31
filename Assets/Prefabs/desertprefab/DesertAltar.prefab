@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desert_Ram_Altar
       objectReference: {fileID: 0}
+    - target: {fileID: 8039898865567044671, guid: 973ccf87dc7280346beb3aeec140cf04, type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
     - target: {fileID: 8043091486694426641, guid: 973ccf87dc7280346beb3aeec140cf04, type: 3}
       propertyPath: m_RootOrder
       value: 0

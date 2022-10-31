@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
 
     public TrailEffect TrailingEffect;
-    private float defaultEmission = 15f;
-    private float movingEmission = 60f;
+    private float defaultEmission = 100f;
+    private float movingEmission = 400f;
     private float zeroEmission = 0f;
 
     private bool isJump, isDuck, isMoveX, isGameOver = false;
