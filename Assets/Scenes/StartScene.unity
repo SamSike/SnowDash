@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.067819566, g: 0.27394518, b: 0.48464394, a: 1}
+  m_IndirectSpecularColor: {r: 0.067819424, g: 0.273946, b: 0.4846446, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2505,7 +2505,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1217882433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3920,6 +3920,10 @@ PrefabInstance:
       value: 349.28214
       objectReference: {fileID: 0}
     - target: {fileID: 681448769236765694, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448769236765694, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 100
       objectReference: {fileID: 0}
@@ -3970,6 +3974,10 @@ PrefabInstance:
     - target: {fileID: 2076881423050965199, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: ShapeModule.m_Rotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076881423050965199, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 2076881423050965199, guid: f872386bf060bd841b01ad2937d45af8, type: 3}
       propertyPath: ShapeModule.alignToDirection
