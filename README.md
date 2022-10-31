@@ -1,6 +1,5 @@
-
-
 **The University of Melbourne**
+
 # COMP30019 – Graphics and Interaction
 
 ## Teamwork plan/summary
@@ -10,74 +9,123 @@
 <!-- Fill this section by Milestone 1 (see specification for details) -->
 
 Game Design: ALL
-  UML diagram
-  Sequence diagram
+UML diagram
+Sequence diagram
 
 Level Design: Sameer
-  Creating Levels
+Creating Levels
 
 Graphics Design: Jason, Xu Koi Kok
-  Themes of the game
-  Objects/Textures
-  
-Game Engineering: Rebeca
-  Coding the physics of the game
+Themes of the game
+Objects/Textures
 
+Game Engineering: Rebeca
+Coding the physics of the game
 
 <!-- [[EndTeamworkPlan]] PLEASE LEAVE THIS LINE UNTOUCHED -->
 
 ## Final report
 
-Read the specification for details on what needs to be covered in this report... 
-
-Remember that _"this document"_ should be `well written` and formatted **appropriately**. 
-Below are examples of markdown features available on GitHub that might be useful in your report. 
-For more details you can find a guide [here](https://docs.github.com/en/github/writing-on-github).
-
 ### Table of contents
-* [Game Summary](#game-summary)
-* [Technologies](#technologies)
-* [Using Images](#using-images)
-* [Code Snipets](#code-snippets)
+
+- [Game Summary](#game-summary)
+- [Technologies](#technologies)
+- [Instructions](#instructions)
+- [High Level Gameplay Decisions](#gameplay-design-decisions)
+- [Asset Design](#asset-design)
+- [Shaders and Special Effects](#shaders-and-special-effects)
 
 ### Game Summary
-Snow Dash is an endless runner game, where the main goal of this game is to get to the highest stage possible
-while not crashing into any obstacles. While running, the player can move up, down, left, or right, 
-corresponding to the direction they want to move, to avoid crashing into oncoming obstacles, such as 
-vehicles, walls, boxes, poles, etc. Crashing results in the game ending. The player can collect various items/power ups to 
-enhance their character (eg. running slower, teleport forward, jump higher). Other items could be armour to block one collision. 
-Player needs to reach the finish line to complete each stage/level, and unlock new stages as they go along.
+
+**Snow Dash** is an endless runner game, where the main goal of this game is to get as many points as possible while not crashing into any obstacles. While running, the player can move left, right, and can duck or jump, in order to avoid crashing into oncoming obstacles, such as
+trees, pillars, branches, etc. Crashing results in the game ending. The player can collect various items/power ups to enhance their character (eg. running slower, teleport forward, jump higher, immunity). Other items available to be picked up include armor which can block one collision.
+The player will traverse through various stages which include different obstacles and unlock new stages as they go along.
 
 ### Video
+
 https://youtu.be/Kv1iRwkiA5k
 
 ### Technologies
+
 Project is created with:
-* Unity 2022.1.9f1 
-* Ipsum version: 2.33
-* Ament library version: 999
 
-### Using Images
+- Unity 2022.1.9f1
 
-You can include images/gifs by adding them to a folder in your repo, currently `Gifs/*`:
+### Instructions
 
-<p align="center">
-  <img src="Gifs/sample.gif" width="300">
-</p>
+Try to avoid obstacles using:
 
-To create a gif from a video you can follow this [link](https://ezgif.com/video-to-gif/ezgif-6-55f4b3b086d4.mov).
+- **Arrow Keys:**
+  Up - Jump
+  Left - Left
+  Right - Right
+  Down - Duck
 
-### Code Snippets 
+- **WASD Keys:**
+  W - Jump
+  A - Left
+  D - Right
+  S - Duck
 
-You may wish to include code snippets, but be sure to explain them properly, and don't go overboard copying
-every line of code in your project!
+**Spacebar** - Jump
+**Shift** - Duck
 
-```c#
-public class CameraController : MonoBehaviour
-{
-    void Start ()
-    {
-        // Do something...
-    }
-}
-```
+Player can collect power ups to help you get more points and survive.
+
+**Power Ups include:**
+
+- Armor - It gives the player ability to avoid one collision
+- Speed Boost - It gives the player a Speed Boost within a duration.
+- Decrease Speed - It slows down the Speed of the Player within a duration.
+- Invincible - It gives the player an ability to move through obstacles within a duration.
+- Points Addition - It gives the player an additional 200 points.
+- Jump Higher - It increases the Vertical Jump Distance of the player within a duration.
+
+### High Level Gameplay Decisions
+
+- Camera Movement
+  There were two options for how the camera was moving with the player, either the camera remains in the center whilst the player moves left/right or the camera would move left/right with the player. We decided to make the camera move left and right with the player as certain obstacles would obscure the view after running past it and this was a solution to that issue.
+
+- Player move speed
+  Initially, the speed in which a player could switch ‘lanes’ was uniform as that seemed like the most logical choice as it felt too choppy otherwise, however, with internal playthroughs, the uniform speed made the game impossible to play. Thus, the speed in which a character can switch a ‘lane’ was scaled to match with the rate in which the character ran forward to maintain the feeling of smoother transitions in low speeds but allowed playability at high speeds.
+
+### Asset Design
+
+Main player (snowman on a sled) was simply a combination of free license assets from the unity asset store. In the same light, many of the themes are prefabs created through the use of different assets and textures found throughout the store.
+
+### Procedural Generation
+
+File Path: /Assets/Scripts/InfiniteFlow.cs
+The game demands that items spawn at random. There is an opportunity to do one of the following periodically:
+Until the following interval, spawn items at random and roll another chance.
+Up to the next period, only spawn double-lane objects, followed by an interval of truly random objects.
+The themes are switched at regular intervals, and the game will always switch to a new theme at the specified intervals.
+Powerups have a chance to spawn at regular intervals, and will spawn between two objects so that the player should always be able to grab a powerup (unless 2 powerups are the same in a row but that is very unlikely). This is so that the player does not get handed powerups without any effort, i.e. if two lanes are blocked and the third lane is a powerup on the same z-value as obstacles, the player does not need to do any extra movements to get the powerup as that is the only pathway available to them
+
+### Shaders and Special Effects
+
+#### Shaders - Graphics Pipeline
+
+Unfortunately, there are no shaders in implementation as we ran into difficulties in attempts to apply shaders to the player since it was a prefab made up of many different materials. Nonetheless, there were ideas for shaders to be implemented.
+
+Cel Shading was a potential implementation for the player/powerups/obstacles in order to create a distinct style that differentiates them from the rest of the background noise. This would have increased the clarity when playing as playthroughs have shown that the game can become chaotic and confusing at times.
+
+Additionally shaders were considered for certain effects such as the fire or dust storm particles as these systems could become a strain on performance where framerate seemed to be negatively impacted in certain stages.
+
+#### Particle System
+
+File Path: Assets/Prefabs/snowprefab/Snow Fall
+Attribute changed
+
+1. Start Size - Random between 0.025 and 0.05 since Snow doesn’t always start at the same size.
+2. Max Particles - 1500 (tested and adjusted according to the Snow Scene)
+   The Max Particle can’t be too big since it will block the view of the player if it’s too big, the whole screen will be filled with Snow.
+3. Rate over Time - 150 (tested and adjusted according to the Snow Scene).
+   The rate over time is tested and changed many times to make the snow more realistic, it can’t be too big otherwise it will look like a Blizzard.
+4. Velocity over Lifetime - X direction (random between -2 and 2)
+   Y direction (random between -2 and -4)
+   Z direction (random between -2 and 2)
+   Realistically, snow doesn’t always travel in the same direction and speed.
+5. Fade (Render) - The Fade rendering mode is also used to represent when the snow melts.
+
+### Evaluation
