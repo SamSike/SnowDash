@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.067819566, g: 0.27394518, b: 0.48464394, a: 1}
+  m_IndirectSpecularColor: {r: 0.06781944, g: 0.27394506, b: 0.484644, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1857,7 +1857,7 @@ MonoBehaviour:
   bigObject: {fileID: 8848872821412255961, guid: 1e4f49afacfb1774db32a9b1f2e72e4a, type: 3}
   duckObject: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
   jumpObject: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
-  doubleObject: {fileID: 2730145364450776267, guid: d9fc690e52a26ad45947b8b0dbc5f2bd, type: 3}
+  doubleObject: {fileID: 427121422061785206, guid: 7280bd95f91ce4a4180adddc9899fc3a, type: 3}
 --- !u!1001 &159157288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   bigObject: {fileID: 8810741421956789120, guid: 2e4c3d1250f74f14184b7470a7b61e12, type: 3}
   duckObject: {fileID: 1587062481076729856, guid: 811e43d33fd1f4cdebdab125700f0925, type: 3}
   jumpObject: {fileID: 4596642462242491601, guid: e7d5c474a949249c88bbb2d5316a2dd6, type: 3}
-  doubleObject: {fileID: 8039898865567044671, guid: 973ccf87dc7280346beb3aeec140cf04, type: 3}
+  doubleObject: {fileID: 5790609936384212431, guid: 57a39acda6e49f645b8faa828deab7d1, type: 3}
 --- !u!1001 &520905566
 PrefabInstance:
   m_ObjectHideFlags: 0
