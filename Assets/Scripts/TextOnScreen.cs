@@ -11,6 +11,7 @@ public class TextOnScreen : MonoBehaviour
     public Text gameOver;
     public Text gameOverScore;
 
+    private float addOnScore = 0;
     private float fadeWaitTime = 1f;
     private float gameOverdelay = 1f;
 
@@ -21,7 +22,7 @@ public class TextOnScreen : MonoBehaviour
 
     void Update()
     {
-        scoreText.text = "SCORE: "+ player.transform.position.z.ToString("0");
+        scoreText.text = "SCORE: "+ (addOnScore + player.transform.position.z).ToString("0");
     }
 
     IEnumerator Tutorial(){
@@ -57,5 +58,13 @@ public class TextOnScreen : MonoBehaviour
         scoreText.text = "";
         highScoretext.text = "";
         tutorialText.text = "";
+    }
+
+    public void SetAddOn(float value){
+        this.addOnScore = value;
+    }
+
+    public float getAddOn(){
+        return this.addOnScore;
     }
 }

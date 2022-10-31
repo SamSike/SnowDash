@@ -6,11 +6,14 @@ public class PowerUp : MonoBehaviour
 {
     public float multiplier = 4f;
 
+    public float extrapoints = 200f;
     public float Jumpfactor = 2f;
     public float duration = 8f;
     public float Invincibility_duration = 15f;
     public GameObject pickupEffect;
     public Player Sled_1;
+
+    public TextOnScreen pointText;
     void OnTriggerEnter (Collider other){
         if(other.CompareTag("Player")){
             StartCoroutine(pickUp(other));
@@ -48,6 +51,12 @@ public class PowerUp : MonoBehaviour
         Sled_1.Setarmorcount((Sled_1.GetArmorCount())+2);
     }
 
+    void MultiplyPoints(Collider player){
+        Debug.Log("Power Up is Multiply Points");
+        pointText.SetAddOn((pointText.getAddOn()) + extrapoints);  
+        Debug.Log(pointText.getAddOn());
+    }
+
     IEnumerator pickUp(Collider player){
         var effect = Instantiate(pickupEffect, transform.position, transform.rotation);
         bool teleporting = false;
@@ -55,6 +64,7 @@ public class PowerUp : MonoBehaviour
         bool isinvinsible = false;
         bool slowing = false;
         int armorcount = 0;
+
 
         Debug.Log(this.name);
         if(this.name == "Armor"){
@@ -103,7 +113,7 @@ public class PowerUp : MonoBehaviour
 
         if(this.name == "PointsMultiplier"){
             //Add Points Multiplier to Player.
-            Debug.Log("Power Up is Multiply Points");
+            MultiplyPoints(player);
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -134,6 +144,7 @@ public class PowerUp : MonoBehaviour
                 teleport(player);
             }             
             teleporting = true; 
+
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
@@ -141,8 +152,7 @@ public class PowerUp : MonoBehaviour
 
             if(teleporting == true){
                 Sled_1.SetZspeed((Sled_1.GetZSpeed())/multiplier);
-                teleporting = false;
-                
+                teleporting = false;               
             }
         }
 
